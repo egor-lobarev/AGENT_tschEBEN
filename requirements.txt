@@ -1,0 +1,8 @@
+beautifulsoup4
+requests
+lxml
+langchain
+langchain-text-splitters
+sentence-transformers
+qdrant-client
+numpy

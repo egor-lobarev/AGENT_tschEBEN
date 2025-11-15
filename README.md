@@ -1,265 +1,326 @@
-# Проект RAG System для строительных материалов
+# RAG System for Construction Materials
 
-## Описание проекта
+Simple RAG (Retrieval-Augmented Generation) system for searching through construction materials documents using semantic search.
 
-Проект представляет собой интеллектуальную систему RAG (Retrieval-Augmented Generation) для работы с информацией о строительных материалах. Система сочетает обработку естественного языка, диалоговые цепочки LangChain, поиск в векторной базе данных и интеграцию с системами учета для предоставления полной информации о материалах, включая наличие и стоимость.
+## Features
 
-## Архитектура системы
+- **Text Splitting**: Uses LangChain's `RecursiveCharacterTextSplitter` to split documents into chunks
+- **Embeddings**: Uses SentenceTransformer model `stsb-roberta-large` for generating embeddings
+- **Vector Store**: Uses Qdrant for storing and searching vectors
+- **KNN Retrieval**: Finds top-k similar documents using cosine distance
 
-```
-Пользовательский запрос → LangChain обработка → Извлечение параметров → Поиск в RAG → Запрос к БД наличия → Генерация ответа
-```
+## Installation
 
-## Функциональность
-
-### 🎯 Обработка запросов (LangChain)
-- **Распознавание намерений** - классификация типов запросов
-- **Извлечение сущностей** - автоматическое выделение параметров материалов
-- **Диалоговые цепочки** - уточняющие вопросы для составления точного запроса
-- **История對話** - учет контекста разговора
-
-### 🔍 Поиск информации (RAG)
-- **Векторный поиск** - семантический поиск по техническим описаниям
-- **Гибридный поиск** - комбинация ключевых слов и векторного поиска
-- **Ранжирование** - сортировка результатов по релевантности
-
-### 💰 Бизнес-логика
-- **Поиск наличия** - интеграция с системами складского учета
-- **Актуальные цены** - получение текущих стоимостей материалов
-- **Поставщики** - информация о доступности у конкретных поставщиков
-
-## Полная архитектура пайплайна
-
-```python
-class ConstructionMaterialsRAG:
-    def process_user_query(self, user_message: str, conversation_history: list = None):
-        # 1. LangChain: Обработка естественного языка и извлечение намерений
-        parsed_intent = self.intent_recognizer.parse(user_message)
-        
-        # 2. Извлечение сущностей и параметров материалов
-        extracted_params = self.entity_extractor.extract(user_message)
-        
-        # 3. Диалоговая цепочка для уточнения параметров
-        if not self._has_sufficient_params(extracted_params):
-            clarification_question = self.dialog_chain.clarify_parameters(extracted_params)
-            return {"type": "clarification", "question": clarification_question}
-        
-        # 4. Поиск в RAG базе технической информации
-        technical_info = self.retriever.search(
-            material_type=extracted_params.material_type,
-            characteristics=extracted_params.characteristics
-        )
-        
-        # 5. Запрос к базе данных наличия и стоимости
-        availability_data = self.availability_client.get_material_availability(
-            material_id=technical_info.material_id,
-            location=extracted_params.location
-        )
-        
-        # 6. Генерация финального ответа
-        final_response = self.generator.generate_comprehensive_response(
-            technical_info=technical_info,
-            availability_data=availability_data,
-            user_query=user_message
-        )
-        
-        return {"type": "final_response", "data": final_response}
-```
-
-## Структура проекта
-
-```
-rag_construction_materials/
-├── data/
-│   ├── raw/                 # Сырые данные после парсинга
-│   ├── processed/           # Обработанные структурированные данные
-│   └── embeddings/          # Векторные представления материалов
-├── src/
-│   ├── langchain_components/ # Обработка естественного языка
-│   │   ├── intent_recognizer.py
-│   │   ├── entity_extractor.py
-│   │   ├── dialog_chains.py
-│   │   └── conversation_manager.py
-│   ├── parsers/             # Модули парсинга для разных сайтов
-│   │   ├── concrete_parser.py
-│   │   ├── sand_parser.py
-│   │   └── crushed_stone_parser.py
-│   ├── rag/                 # RAG система
-│   │   ├── vector_store.py
-│   │   ├── retriever.py
-│   │   └── generator.py
-│   ├── database/            # Работа с базами данных
-│   │   ├── availability_client.py
-│   │   ├── price_manager.py
-│   │   └── inventory_api.py
-│   └── utils/
-│       ├── config.py
-│       └── logger.py
-├── config/
-│   ├── langchain_config.yaml # Настройки цепочек
-│   ├── parsing_config.yaml   # Настройки парсеров
-│   ├── rag_config.yaml      # Настройки RAG системы
-│   └── database_config.yaml # Настройки БД наличия
-├── tests/                   # Тесты
-├── docs/                    # Документация
-├── requirements.txt         # Зависимости Python
-└── README.md
-```
-
-## Примеры работы системы
-
-### Пример 1: Полный запрос с уточнением
-```
-Пользователь: "Нужен бетон для фундамента"
-
-Система: "Какой марки бетон вам требуется? И в каком регионе нужно найти наличие?"
-
-Пользователь: "М400 в Москве"
-
-Система: 
-"✅ Технические характеристики бетона М400:
-   - Прочность: 400 кгс/см²
-   - Применение: фундаменты многоэтажных зданий
-   - Морозостойкость: F200
-
-🏪 Наличие и цены в Москве:
-   - Поставщик 'РусСтрой': 4500 руб/м³, в наличии 50 м³
-   - Поставщик 'СтройМаг': 4300 руб/м³, в наличии 25 м³"
-```
-
-### Пример 2: Сложный запрос
-```
-Пользователь: "Найти гранитный щебень фракции 20-40 с доставкой в СПб"
-
-Система:
-"🔍 Найдены варианты гранитного щебня 20-40 мм:
-
-Технические характеристики:
-- Прочность: М1200
-- Лещадность: 15%
-- Морозостойкость: F300
-
-🏪 Доступные поставщики в Санкт-Петербурге:
-1. Карьер 'Северный' - 1800 руб/тонна, доставка 5000 руб
-2. 'ПетроЩебень' - 1750 руб/тонна, доставка включена от 10 тонн"
-```
-
-## Конфигурация
-
-### Настройки LangChain (langchain_config.yaml)
-```yaml
-chains:
-  intent_recognition:
-    model: "gpt-4"
-    supported_intents: ["price_check", "availability", "technical_info", "comparison"]
-  
-  entity_extraction:
-    entities: ["material_type", "fraction", "strength", "location", "quantity"]
-  
-  dialog_management:
-    max_clarification_attempts: 3
-    context_window: 10
-```
-
-### Настройки базы данных наличия (database_config.yaml)
-```yaml
-database:
-  inventory:
-    type: "postgresql"
-    host: "inventory-db.prod"
-    tables:
-      availability: "material_availability"
-      prices: "current_prices"
-      suppliers: "supplier_info"
-  
-  api:
-    inventory_service: "https://api.inventory.company.com/v1"
-    cache_ttl: 300  # 5 минут
-```
-
-## Ключевые компоненты
-
-### 1. LangChain обработчик
-```python
-class LangChainProcessor:
-    def process_query(self, query: str, history: List) -> ProcessedQuery:
-        # Распознавание намерения
-        intent = self.classify_intent(query)
-        
-        # Извлечение параметров
-        entities = self.extract_entities(query)
-        
-        # Проверка полноты данных
-        if self.needs_clarification(entities, intent):
-            return ClarificationRequest(entities)
-        
-        return ProcessedQuery(intent, entities, history)
-```
-
-### 2. Клиент наличия и цен
-```python
-class AvailabilityClient:
-    def get_real_time_availability(self, material_params: Dict, location: str) -> List[SupplierOffer]:
-        # Запрос к базе данных наличия
-        availability_data = self.db_query(
-            material_type=material_params['type'],
-            characteristics=material_params.get('characteristics', {}),
-            location=location
-        )
-        
-        # Обогащение данными о ценах
-        enriched_data = self.enrich_with_prices(availability_data)
-        
-        return enriched_data
-```
-
-## Установка и запуск
-
-### 1. Установка зависимостей
+1. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Настройка конфигурации
-```bash
-cp config/*.example.yaml config/
-# Настройте файлы конфигурации под ваше окружение
-```
+2. **Choose one of the following options for Qdrant:**
 
-### 3. Инициализация базы данных
+### Option 1: In-Memory Mode (No Docker Required - Easiest for Testing)
+
+No Docker or server setup needed! Perfect for testing and development:
+
 ```python
-from src.database.availability_client import AvailabilityClient
-from src.langchain_components.dialog_chains import DialogChainManager
+from src.rag.vectore_store import VectorStore
 
-# Инициализация компонентов
-availability_client = AvailabilityClient()
-dialog_manager = DialogChainManager()
+# Use in-memory mode (no Docker needed)
+vector_store = VectorStore(use_in_memory=True)
+vector_store.add_documents("data/raw/raw_materials.jsonl")
 ```
 
-## Мониторинг и метрики
+**Note**: Data is stored in memory and will be lost when the program ends.
 
-Система отслеживает:
-- **Качество распознавания намерений** (accuracy)
-- **Полнота извлечения сущностей** (F1-score)
-- **Время ответа** различных компонентов
-- **Точность информации о наличии** (расхождения с реальностью)
-- **Удовлетворенность пользователей**
+### Option 2: Docker (Recommended for Production)
 
-## Развертывание
-
-### Production окружение
-```yaml
-# docker-compose.prod.yaml
-services:
-  rag-api:
-    image: rag-construction:latest
-    environment:
-      - DB_HOST=inventory-db
-      - LLM_PROVIDER=openai
-      - CACHE_ENABLED=true
-    depends_on:
-      - inventory-db
-      - vector-db
+Start Qdrant server using Docker:
+```bash
+docker run -p 6333:6333 qdrant/qdrant
 ```
 
-Система предназначена для использования строительными компаниями, поставщиками материалов и частными клиентами для быстрого получения комплексной информации о строительных материалах.
+Then use the default settings (no `use_in_memory` parameter).
+
+### Option 3: Native Installation
+
+Install Qdrant natively (see [Qdrant documentation](https://qdrant.tech/documentation/guides/installation/)).
+
+## System Requirements
+
+**Minimum:**
+- Python 3.8+
+- 4 GB RAM
+- 5 GB disk space
+- Internet connection (for initial model download)
+
+**Recommended:**
+- Python 3.10+
+- 8 GB RAM
+- 10 GB disk space
+
+**Model Requirements:**
+- `stsb-roberta-large`: ~420 MB model size, ~2 GB RAM when loaded
+- Embedding dimension: 1024
+
+For detailed system requirements, see [REQUIREMENTS.md](REQUIREMENTS.md).
+
+## Quick Start
+
+### For LangChain Integration
+
+If you're building a system with LangChain for user interaction, see:
+```bash
+python langchain_integration_example.py
+```
+
+This example shows:
+- How to wrap the retriever for LangChain compatibility
+- Integration with LangChain chains
+- Building conversational systems
+
+### 1. Build Vector Store
+
+**Option A: In-Memory (No Docker)**
+```python
+from src.rag.vectore_store import VectorStore
+from src.rag.retriver import Retriever
+
+# Initialize vector store (no Docker needed)
+vector_store = VectorStore(use_in_memory=True)
+
+# Load and index documents
+vector_store.add_documents("data/raw/raw_materials.jsonl")
+
+# IMPORTANT: Share the same client for retriever in in-memory mode
+retriever = Retriever(
+    qdrant_client=vector_store.qdrant_client  # Share the client!
+)
+```
+
+**Option B: With Docker/Server**
+```python
+from src.rag.vectore_store import VectorStore
+
+# Initialize vector store
+vector_store = VectorStore(
+    collection_name="construction_materials",
+    qdrant_host="localhost",
+    qdrant_port=6333
+)
+
+# Load and index documents
+vector_store.add_documents("data/raw/raw_materials.jsonl")
+```
+
+### 2. Query Documents
+
+**Option A: In-Memory (No Docker)**
+```python
+from src.rag.retriver import Retriever
+
+# Initialize retriever with shared client (from vector_store)
+# IMPORTANT: In in-memory mode, you must share the same QdrantClient
+retriever = Retriever(
+    qdrant_client=vector_store.qdrant_client  # Share the client!
+)
+
+# Search for top 5 documents
+results = retriever.retrieve("бетон М400 для фундамента", top_k=5)
+
+for result in results:
+    print(f"Score: {result['score']}")
+    print(f"URL: {result['url']}")
+    print(f"Text: {result['text'][:200]}...")
+```
+
+**Option B: With Docker/Server**
+```python
+from src.rag.retriver import Retriever
+
+# Initialize retriever
+retriever = Retriever(
+    collection_name="construction_materials",
+    qdrant_host="localhost",
+    qdrant_port=6333
+)
+
+# Search for top 5 documents
+results = retriever.retrieve("бетон М400 для фундамента", top_k=5)
+
+for result in results:
+    print(f"Score: {result['score']}")
+    print(f"URL: {result['url']}")
+    print(f"Text: {result['text'][:200]}...")
+```
+
+### 3. Use RAG Generator
+
+```python
+from src.rag.generator import RAGGenerator
+
+generator = RAGGenerator(retriever)
+result = generator.generate("бетон М300 характеристики", top_k=3)
+print(result['response'])
+```
+
+## Running Examples
+
+### Example Scripts
+
+**Basic Example (in-memory, no Docker):**
+```bash
+python example_no_docker.py
+```
+
+**LangChain Integration Example:**
+```bash
+# Shows how to integrate with LangChain for user interaction systems
+python langchain_integration_example.py
+```
+
+### Run Tests
+```bash
+python test_retriever.py
+```
+
+The test verifies that the retriever can find top 2 documents by query.
+
+### Inspect Database
+
+View the contents of your database and see how text is split:
+
+```bash
+# IMPORTANT: Load data first! (in-memory mode requires loading each session)
+python inspect_database.py --use-in-memory --load-data data/raw/raw_materials.jsonl
+
+# With text splitting demonstration
+python inspect_database.py --use-in-memory --load-data data/raw/raw_materials.jsonl --show-splitting
+
+# With statistics
+python inspect_database.py --use-in-memory --load-data data/raw/raw_materials.jsonl --show-stats --show-splitting
+
+# For Docker mode (data persists, so load once with setup_rag.py)
+python inspect_database.py --collection construction_materials
+```
+
+**Note**: In in-memory mode, the database is empty by default. You must either:
+1. Use `--load-data` flag when inspecting, OR
+2. Run `python setup_rag.py` first to load documents
+
+
+## Project Structure
+
+```
+.
+├── data/
+│   └── raw/
+│       └── raw_materials.jsonl    # Input documents
+├── src/
+│   └── rag/
+│       ├── vectore_store.py       # Vector store with Qdrant
+│       ├── retriver.py            # KNN retriever
+│       └── generator.py            # RAG generator
+├── example_no_docker.py           # Basic example (in-memory)
+├── langchain_integration_example.py  # LangChain integration example
+├── test_retriever.py              # Tests
+└── requirements.txt               # Dependencies
+```
+
+## Data Format
+
+Documents in `raw_materials.jsonl` should have the following structure:
+
+```json
+{
+    "url": "https://example.com",
+    "error": null,
+    "content": "Document text content...",
+    "timestamp": 1234567890.0
+}
+```
+
+## Configuration
+
+You can customize the vector store and retriever:
+
+```python
+# Vector store with custom settings
+vector_store = VectorStore(
+    collection_name="my_collection",
+    chunk_size=500,          # Size of text chunks
+    chunk_overlap=50,        # Overlap between chunks
+    qdrant_host="localhost",
+    qdrant_port=6333
+)
+
+# Retriever
+retriever = Retriever(
+    collection_name="my_collection",
+    model_name="stsb-roberta-large",  # Embedding model
+    qdrant_host="localhost",
+    qdrant_port=6333
+)
+```
+
+## How It Works
+
+1. **Document Loading**: Loads documents from JSONL file
+2. **Text Splitting**: Splits documents into chunks using LangChain's `RecursiveCharacterTextSplitter`
+   - Default chunk size: 500 characters
+   - Default overlap: 50 characters
+   - Splits at natural boundaries (paragraphs, sentences)
+   - Overlap preserves context across chunk boundaries
+3. **Embedding**: Generates embeddings using SentenceTransformer (`stsb-roberta-large`)
+   - Each chunk becomes a 1024-dimensional vector
+4. **Storage**: Stores embeddings in Qdrant vector database
+   - Each chunk stored with metadata (URL, document index, chunk index, original text)
+5. **Retrieval**: Searches using KNN with cosine distance
+   - Query is embedded using the same model
+   - Finds top-k most similar chunks
+6. **Generation**: Combines retrieved documents to generate responses
+
+### Text Splitting Details
+
+LangChain's `RecursiveCharacterTextSplitter` works by:
+
+1. **Recursive Strategy**: Tries natural boundaries in order:
+   - Double newlines (`\n\n`) - paragraphs
+   - Single newlines (`\n`) - lines  
+   - Sentence endings (`.`, `!`, `?`) - sentences
+   - Spaces - words
+   - Characters - last resort
+
+2. **Maintaining Overlap**: Each chunk overlaps with neighbors by 50 characters (default)
+   - Preserves context at boundaries
+   - Prevents information loss
+   - Better search results
+
+3. **Respecting Chunk Size**: Keeps chunks close to 500 characters (default)
+
+**Visual Example:**
+```
+Text (1000 chars):
+┌─────────────────────────┐
+│ Chunk 1: 0-500          │
+└─────────────────────────┘
+         │ 50 char overlap
+         ▼
+┌─────────────────────────┐
+│ Chunk 2: 450-950        │
+└─────────────────────────┘
+         │ 50 char overlap
+         ▼
+┌─────────────────────────┐
+│ Chunk 3: 900-1000       │
+└─────────────────────────┘
+```
+
+**Why Overlap Matters:**
+- Without overlap: "Бетон М400 имеет прочность" | "393 кгс/см²" (connection lost!)
+- With overlap: Both chunks contain "Бетон М400 имеет прочность 393 кгс/см²" (context preserved!)
+
+For detailed explanation, see [TEXT_SPLITTING_EXPLAINED.md](TEXT_SPLITTING_EXPLAINED.md)
+
+## License
+
+MIT
