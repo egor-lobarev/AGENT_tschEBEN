@@ -2,6 +2,43 @@
 
 Simple RAG (Retrieval-Augmented Generation) system for searching through construction materials documents using semantic search.
 
+## Main Entry Points
+
+### Construction Materials Bot (`bot.py`)
+
+Полнофункциональный бот для обработки запросов пользователей интернет-магазина стройматериалов:
+
+```python
+from bot import ConstructionMaterialsBot
+
+# Инициализация (требуется MISTRAL_API_KEY)
+bot = ConstructionMaterialsBot()
+
+# Обработка запроса
+response = bot.process_query("Нужен бетон для фундамента", session_id="user123")
+print(response.message)
+```
+
+**Возможности:**
+- Классификация запросов (информационные / спецификация заказа)
+- Извлечение параметров заказа
+- Генерация уточняющих вопросов
+- Интеграция с RAG для информационных запросов
+- Поиск товаров в базе данных
+
+### RAG Module (`src/rag/`)
+
+Модуль для семантического поиска по документам:
+- `vectore_store.py` - векторное хранилище (Qdrant)
+- `retriver.py` - поиск похожих документов
+- `generator.py` - генерация ответов на основе найденных документов
+- `api_wrapper.py` - обертка для интеграции с LangChain
+
+### Database Module (`src/database/`)
+
+Модуль для работы с базой товаров:
+- `products_api.py` - API для поиска товаров по спецификации
+
 ## Features
 
 - **Text Splitting**: Uses LangChain's `RecursiveCharacterTextSplitter` to split documents into chunks
@@ -16,7 +53,13 @@ Simple RAG (Retrieval-Augmented Generation) system for searching through constru
 pip install -r requirements.txt
 ```
 
-2. **Choose one of the following options for Qdrant:**
+2. Configure environment variables:
+```bash
+cp .env.example .env
+# Edit .env and add your MISTRAL_API_KEY
+```
+
+3. **Choose one of the following options for Qdrant:**
 
 ### Option 1: In-Memory Mode (No Docker Required - Easiest for Testing)
 
@@ -66,17 +109,89 @@ For detailed system requirements, see [REQUIREMENTS.md](REQUIREMENTS.md).
 
 ## Quick Start
 
-### For LangChain Integration
+### Construction Materials Bot
 
-If you're building a system with LangChain for user interaction, see:
 ```bash
-python langchain_integration_example.py
+python bot.py
 ```
 
-This example shows:
-- How to wrap the retriever for LangChain compatibility
-- Integration with LangChain chains
-- Building conversational systems
+### LangChain Integration Guide
+
+**Интеграция RAG модуля с LangChain:**
+
+Система использует **RAG модуль из этого проекта** (`src/rag/`). OrchestratorChain вызывает `query_rag()` из `src/rag/api_wrapper.py`, который использует:
+- `src/rag/generator.py` - генерация ответов
+- `src/rag/retriver.py` - поиск документов
+- `src/rag/vectore_store.py` - векторное хранилище
+
+```python
+from langchain_integration_example import setup_rag_system
+from src.rag.api_wrapper import initialize_rag, query_rag
+
+# Инициализация RAG системы (использует проектную RAG систему)
+vector_store, retriever, custom_retriever = setup_rag_system()
+initialize_rag(retriever)  # Инициализирует RAGGenerator из src/rag/generator.py
+
+# Использование в LangChain chains
+response = query_rag("бетон М300 характеристики")  # Использует проектную RAG систему
+```
+
+**Интеграция модуля БД с LangChain:**
+
+```python
+from src.database.products_api import get_products
+from src.schemas.models import OrderSpecs, ProductCharacteristics
+
+# Создание спецификации
+specs = OrderSpecs(
+    product_type="бетон",
+    quantity="5 кубов",
+    characteristics=ProductCharacteristics(mark="М300")
+)
+
+# Поиск товаров
+products = get_products(specs)
+```
+
+**Подключение реального API базы данных:**
+
+Текущая реализация использует мок API (`src/database/products_api.py`). Для подключения реального API:
+
+1. Откройте файл `src/database/products_api.py`
+2. Замените функцию `get_products()` на вашу реализацию:
+
+```python
+def get_products(specs: OrderSpecs) -> List[Dict[str, Any]]:
+    """
+    Get products from database based on order specifications.
+    
+    Args:
+        specs: Order specifications
+        
+    Returns:
+        List of product dictionaries with keys:
+        - id, name, product_type, price_per_unit, unit, available, description
+        - mark (optional), fraction (optional)
+    """
+    # Ваша реализация API запроса к базе данных
+    # Например:
+    # response = requests.post("https://your-api.com/products", json=specs.dict())
+    # return response.json()
+    
+    # Важно: формат ответа должен соответствовать ожидаемому формату
+    # См. примеры в текущем моке
+```
+
+**Полная интеграция через Chains:**
+
+```python
+from src.chains.orchestrator import OrchestratorChain
+from src.chains.classification import ClassificationChain
+from src.chains.extraction import ExtractionChain
+from src.chains.clarification import ClarificationChain
+
+# Все компоненты автоматически интегрированы в bot.py
+```
 
 ### 1. Build Vector Store
 
@@ -212,17 +327,29 @@ python inspect_database.py --collection construction_materials
 
 ```
 .
+├── bot.py                         # Главная точка входа - Construction Materials Bot
 ├── data/
 │   └── raw/
 │       └── raw_materials.jsonl    # Input documents
 ├── src/
-│   └── rag/
-│       ├── vectore_store.py       # Vector store with Qdrant
-│       ├── retriver.py            # KNN retriever
-│       └── generator.py            # RAG generator
+│   ├── chains/                    # LangChain chains
+│   │   ├── classification.py     # Классификация запросов
+│   │   ├── extraction.py         # Извлечение параметров заказа
+│   │   ├── clarification.py      # Генерация уточняющих вопросов
+│   │   └── orchestrator.py       # Главный orchestrator
+│   ├── schemas/                   # Pydantic модели
+│   │   └── models.py
+│   ├── rag/                       # RAG модуль
+│   │   ├── vectore_store.py      # Vector store with Qdrant
+│   │   ├── retriver.py           # KNN retriever
+│   │   ├── generator.py          # RAG generator
+│   │   └── api_wrapper.py         # Обертка для LangChain
+│   └── database/                  # Модуль БД
+│       └── products_api.py       # API для поиска товаров
 ├── example_no_docker.py           # Basic example (in-memory)
 ├── langchain_integration_example.py  # LangChain integration example
 ├── test_retriever.py              # Tests
+├── .env.example                   # Пример конфигурации
 └── requirements.txt               # Dependencies
 ```
 

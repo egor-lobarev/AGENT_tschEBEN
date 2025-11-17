@@ -1,59 +1,98 @@
-"""
-Setup script to initialize the RAG system.
-Run this first to build the vector store from documents.
-"""
-
-import sys
-from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).parent))
-
 from src.rag.vectore_store import VectorStore
+from src.rag.retriver import Retriever
+from typing import List, Dict, Any
 
-
-def setup():
-    """Set up the vector store with documents."""
-    print("Setting up RAG system...")
-    print("=" * 60)
+class CustomRetriever:
+    """
+    Custom retriever wrapper that integrates with LangChain.
+    This makes our Qdrant-based retriever compatible with LangChain chains.
+    """
     
-    # Check if data file exists
-    data_path = Path("data/raw/raw_materials.jsonl")
-    if not data_path.exists():
-        print(f"Error: Data file not found at {data_path}")
-        print("Please ensure the data file exists.")
-        return
+    def __init__(self, retriever: Retriever):
+        """
+        Initialize the custom retriever.
+        
+        Args:
+            retriever: Our Retriever instance
+        """
+        self.retriever = retriever
     
-    print(f"Found data file: {data_path}")
+    def get_relevant_documents(self, query: str, top_k: int = 5) -> List[Dict[str, Any]]:
+        """
+        Retrieve relevant documents for a query.
+        This method signature is compatible with LangChain's retriever interface.
+        
+        Args:
+            query: User query
+            top_k: Number of documents to retrieve
+            
+        Returns:
+            List of document dictionaries with 'page_content' and 'metadata'
+        """
+        # Use our retriever to get results
+        results = self.retriever.retrieve(query, top_k=top_k)
+        
+        # Convert to LangChain format
+        documents = []
+        for result in results:
+            documents.append({
+                'page_content': result['text'],  # LangChain expects 'page_content'
+                'metadata': {
+                    'url': result['url'],
+                    'score': result['score'],
+                    'chunk_index': result.get('chunk_index', 0),
+                    'doc_index': result.get('doc_index', 0),
+                    'timestamp': result.get('timestamp', 0)
+                }
+            })
+        
+        return documents
     
+    def invoke(self, query: str, top_k: int = 5) -> List[Dict[str, Any]]:
+        """
+        LangChain-compatible invoke method.
+        
+        Args:
+            query: User query
+            top_k: Number of documents to retrieve
+            
+        Returns:
+            List of documents
+        """
+        return self.get_relevant_documents(query, top_k)
+    
+def setup_rag_system(use_in_memory: bool = True, data_path: str = "data/raw/raw_materials.jsonl"):
+    """
+    Set up the RAG system and return components ready for LangChain integration.
+    
+    Args:
+        use_in_memory: Use in-memory Qdrant (no Docker)
+        data_path: Path to JSONL data file
+        
+    Returns:
+        Tuple of (vector_store, retriever, custom_retriever)
+    """
     # Initialize vector store
-    print("\nInitializing vector store...")
-    print("Using in-memory mode (no Docker required)")
     vector_store = VectorStore(
         collection_name="construction_materials",
-        use_in_memory=True  # No Docker needed!
+        use_in_memory=use_in_memory
     )
     
-    # Add documents
-    print(f"\nLoading and indexing documents from {data_path}...")
-    print("This may take a few minutes depending on the number of documents...")
-    
-    try:
-        vector_store.add_documents(str(data_path))
-        
-        # Show collection info
+    # Load documents if not already loaded
+    info = vector_store.get_collection_info()
+    if info['points_count'] == 0:
+        print(f"Loading documents from {data_path}...")
+        vector_store.add_documents(data_path)
         info = vector_store.get_collection_info()
-        print(f"\n✓ Successfully indexed {info['points_count']} document chunks")
-        print(f"  Collection: {vector_store.collection_name}")
-        print("\nSetup complete! You can now use the RAG system.")
-        print("\nTry running: python example_rag.py")
-        
-    except Exception as e:
-        print(f"\n✗ Error during setup: {e}")
-        print("\nIf you want to use Docker instead of in-memory mode:")
-        print("  1. Start Qdrant: docker run -p 6333:6333 qdrant/qdrant")
-        print("  2. Remove use_in_memory=True from VectorStore initialization")
-
-
-if __name__ == "__main__":
-    setup()
-
+        print(f"Loaded {info['points_count']} chunks")
+    
+    # Initialize retriever
+    retriever = Retriever(
+        collection_name="construction_materials",
+        qdrant_client=vector_store.qdrant_client if use_in_memory else None
+    )
+    
+    # Create LangChain-compatible retriever
+    custom_retriever = CustomRetriever(retriever)
+    
+    return vector_store, retriever, custom_retriever

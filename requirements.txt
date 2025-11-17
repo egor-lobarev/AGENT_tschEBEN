@@ -3,6 +3,10 @@ requests
 lxml
 langchain
 langchain-text-splitters
+langchain-mistralai
+langchain-core
 sentence-transformers
 qdrant-client
 numpy
+pydantic
+python-dotenv
