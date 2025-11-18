@@ -1,6 +1,16 @@
 from src.rag.vectore_store import VectorStore
 from src.rag.retriver import Retriever
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
+from qdrant_client import QdrantClient
+from pathlib import Path
+
+# Default persistent storage path for Qdrant
+DEFAULT_QDRANT_STORAGE_PATH = "data/qdrant_storage"
+
+# Shared Qdrant client singleton (for persistent storage)
+# This ensures the same instance is reused across bot initializations
+_shared_qdrant_client: Optional[QdrantClient] = None
+_shared_qdrant_path: Optional[str] = None
 
 class CustomRetriever:
     """
@@ -61,21 +71,53 @@ class CustomRetriever:
         """
         return self.get_relevant_documents(query, top_k)
     
-def setup_rag_system(use_in_memory: bool = True, data_path: str = "data/raw/raw_materials.jsonl"):
+def setup_rag_system(
+    use_in_memory: bool = False,
+    data_path: str = "data/raw/raw_materials.jsonl",
+    qdrant_storage_path: str = DEFAULT_QDRANT_STORAGE_PATH
+):
     """
     Set up the RAG system and return components ready for LangChain integration.
     
+    Uses persistent disk storage by default to avoid recomputing embeddings.
+    Data persists across bot initializations and process restarts.
+    
     Args:
-        use_in_memory: Use in-memory Qdrant (no Docker)
+        use_in_memory: If True, use in-memory Qdrant (data lost on restart)
         data_path: Path to JSONL data file
+        qdrant_storage_path: Path to store Qdrant data (only used if use_in_memory=False)
         
     Returns:
         Tuple of (vector_store, retriever, custom_retriever)
     """
-    # Initialize vector store
+    global _shared_qdrant_client, _shared_qdrant_path
+    
+    # Create or reuse shared Qdrant client
+    if use_in_memory:
+        # In-memory mode (for testing, data lost on restart)
+        if _shared_qdrant_client is None:
+            print("Creating shared in-memory Qdrant client...")
+            _shared_qdrant_client = QdrantClient(":memory:")
+        else:
+            print("Reusing existing in-memory Qdrant client...")
+        qdrant_client = _shared_qdrant_client
+    else:
+        # Persistent disk storage (default, data persists across restarts)
+        if _shared_qdrant_client is None or _shared_qdrant_path != qdrant_storage_path:
+            # Ensure storage directory exists
+            Path(qdrant_storage_path).mkdir(parents=True, exist_ok=True)
+            print(f"Creating persistent Qdrant client at {qdrant_storage_path}...")
+            _shared_qdrant_client = QdrantClient(path=qdrant_storage_path)
+            _shared_qdrant_path = qdrant_storage_path
+        else:
+            print(f"Reusing existing persistent Qdrant client at {qdrant_storage_path}...")
+        qdrant_client = _shared_qdrant_client
+    
+    # Initialize vector store with shared client
     vector_store = VectorStore(
         collection_name="construction_materials",
-        use_in_memory=use_in_memory
+        use_in_memory=use_in_memory,
+        qdrant_client=qdrant_client
     )
     
     # Load documents if not already loaded
@@ -85,11 +127,14 @@ def setup_rag_system(use_in_memory: bool = True, data_path: str = "data/raw/raw_
         vector_store.add_documents(data_path)
         info = vector_store.get_collection_info()
         print(f"Loaded {info['points_count']} chunks")
+    else:
+        print(f"Using existing vector store with {info['points_count']} chunks (skipping re-embedding)")
     
-    # Initialize retriever
+    # Initialize retriever with shared client
     retriever = Retriever(
         collection_name="construction_materials",
-        qdrant_client=vector_store.qdrant_client if use_in_memory else None
+        use_in_memory=use_in_memory,
+        qdrant_client=qdrant_client
     )
     
     # Create LangChain-compatible retriever

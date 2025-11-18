@@ -27,7 +27,7 @@ class ConstructionMaterialsBot:
     def __init__(
         self,
         mistral_api_key: Optional[str] = None,
-        use_in_memory: bool = True,
+        use_in_memory: bool = False,
         data_path: str = "data/raw/raw_materials.jsonl"
     ):
         """
@@ -35,7 +35,8 @@ class ConstructionMaterialsBot:
         
         Args:
             mistral_api_key: Mistral API key (if None, reads from MISTRAL_API_KEY env var)
-            use_in_memory: Use in-memory Qdrant (no Docker)
+            use_in_memory: If True, use in-memory Qdrant (data lost on restart). 
+                          If False, use persistent disk storage (default, recommended)
             data_path: Path to JSONL data file for RAG
         """
         self.mistral_api_key = mistral_api_key or os.getenv("MISTRAL_API_KEY")
