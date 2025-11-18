@@ -47,7 +47,7 @@ class ConstructionMaterialsBot:
         
         print("Initializing Mistral LLM...")
         self.llm = ChatMistralAI(
-            model="mistral-large-latest",
+            model="mistral-tiny",
             mistral_api_key=self.mistral_api_key,
             temperature=0.3
         )
