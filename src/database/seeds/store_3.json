@@ -1,0 +1,48 @@
+{
+  "store": {
+    "name": "База СтройМат",
+    "address": "Екатеринбург, ул. Техническая, 7"
+  },
+  "products": [
+    {
+      "category": "цемент",
+      "model": "М400",
+      "name": "Цемент М400 Д20",
+      "description": "Для бетонов и растворов",
+      "price": 520,
+      "stock": 500,
+      "unit": "мешок",
+      "fraction": null
+    },
+    {
+      "category": "цемент",
+      "model": "М500",
+      "name": "Цемент М500 Д0",
+      "description": "Высокопрочный цемент",
+      "price": 650,
+      "stock": 320,
+      "unit": "мешок",
+      "fraction": null
+    },
+    {
+      "category": "бетон",
+      "model": "B30",
+      "name": "Бетон B30",
+      "description": "Для несущих конструкций и лестниц",
+      "price": 4950,
+      "stock": 50,
+      "unit": "м3",
+      "fraction": null
+    },
+    {
+      "category": "щебень",
+      "model": "М800",
+      "name": "Щебень гранитный М800",
+      "description": "Фракция 5–20 мм",
+      "price": 1650,
+      "stock": 200,
+      "unit": "т",
+      "fraction": "5–20 мм"
+    }
+  ]
+}

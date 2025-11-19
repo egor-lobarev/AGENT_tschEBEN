@@ -10,3 +10,5 @@ qdrant-client
 numpy
 pydantic
 python-dotenv
+sqlalchemy
+psycopg2-binary
