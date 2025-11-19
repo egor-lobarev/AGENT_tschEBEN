@@ -219,3 +219,5 @@ venv
 
 .env
 .DS_Store
+
+data/qdrant_storage/

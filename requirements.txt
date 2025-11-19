@@ -1,12 +1,14 @@
 beautifulsoup4
+dotenv
 requests
 lxml
 langchain
 langchain-text-splitters
 langchain-mistralai
 langchain-core
+langchain-community
 sentence-transformers
-qdrant-client
+qdrant-client==1.7.3
 numpy
 pydantic
 python-dotenv

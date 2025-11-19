@@ -61,7 +61,7 @@ class ConstructionMaterialsBot:
         
         initialize_rag(retriever)
         
-        print("Initializing chains...")
+        print("Launch database...")
         from src.database.products_api import ProductDatabase
 
         self.product_db = ProductDatabase(
@@ -71,8 +71,9 @@ class ConstructionMaterialsBot:
 
         self.product_db.init_db()
 
-        self.product_db.seed_from_json("seeds")
+        self.product_db.seed_from_json("src/database/seeds")
 
+        print("Initializing chains...")
         self.classification_chain = ClassificationChain(self.llm)
         self.extraction_chain = ExtractionChain(self.llm)
         self.clarification_chain = ClarificationChain(self.llm)

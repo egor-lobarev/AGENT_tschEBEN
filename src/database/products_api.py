@@ -1,9 +1,8 @@
-import os
-import json
 from sqlalchemy import select
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from .db_models import Product, Store, Base
+from src.schemas.models import OrderSpecs
 
 
 class ProductDatabase:
@@ -12,6 +11,7 @@ class ProductDatabase:
         self.init_db()
 
     def init_db(self):
+        Base.metadata.drop_all(self.engine)
         Base.metadata.create_all(self.engine)
 
     def seed_from_json(self, seeds_dir: str):
@@ -29,16 +29,14 @@ class ProductDatabase:
                 with open(path, "r", encoding="utf-8") as f:
                     data = json.load(f)
 
-                # --- создаём магазин ---
                 store_info = data["store"]
                 store = Store(
                     name=store_info["name"],
                     address=store_info.get("address")
                 )
                 session.add(store)
-                session.flush()  # чтобы получить store.id
+                session.flush()
 
-                # --- создаём товары ---
                 for item in data["products"]:
                     product = Product(
                         name=item["name"],
@@ -58,6 +56,8 @@ class ProductDatabase:
 
     def get_products(self, specs: OrderSpecs, limit=50):
         with Session(self.engine) as session:
+            if specs.product_type == 'None':
+                print("Error of request. There is no category")
 
             stmt = select(Product).where(Product.is_active == True)
 
