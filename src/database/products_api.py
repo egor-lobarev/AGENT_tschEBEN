@@ -1,156 +1,94 @@
-"""
-Mock API for products database.
-This is a mock implementation of Лизы's product database API.
-Can be easily replaced with a real API implementation.
-
-To connect a real database API:
-1. Replace the get_products() function with your implementation
-2. Ensure the return format matches: List[Dict[str, Any]] with keys:
-   - id, name, product_type, price_per_unit, unit, available, description
-   - mark (optional), fraction (optional)
-3. See README.md for detailed instructions
-"""
-
-from typing import List, Dict, Any
-from src.schemas.models import OrderSpecs
+import os
+import json
+from sqlalchemy import select
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session
+from .db_models import Product, Store, Base
 
 
-def get_products(specs: OrderSpecs) -> List[Dict[str, Any]]:
-    """
-    Get products from database based on order specifications.
-    This is the API function for Лизы's product database module.
-    
-    Args:
-        specs: Order specifications
-        
-    Returns:
-        List of product dictionaries matching the specifications
-    """
-    # Mock product database
-    mock_products = [
-        {
-            "id": 1,
-            "name": "Бетон М300",
-            "product_type": "бетон",
-            "mark": "М300",
-            "price_per_unit": 3500,
-            "unit": "куб.м",
-            "available": True,
-            "description": "Бетон марки М300, подходит для фундаментов и монолитных конструкций"
-        },
-        {
-            "id": 2,
-            "name": "Бетон М350",
-            "product_type": "бетон",
-            "mark": "М350",
-            "price_per_unit": 3800,
-            "unit": "куб.м",
-            "available": True,
-            "description": "Бетон марки М350, повышенная прочность для ответственных конструкций"
-        },
-        {
-            "id": 3,
-            "name": "Бетон М400",
-            "product_type": "бетон",
-            "mark": "М400",
-            "price_per_unit": 4200,
-            "unit": "куб.м",
-            "available": True,
-            "description": "Бетон марки М400, высокопрочный для промышленных объектов"
-        },
-        {
-            "id": 4,
-            "name": "Песок карьерный",
-            "product_type": "песок",
-            "mark": None,
-            "fraction": "0-5",
-            "price_per_unit": 800,
-            "unit": "куб.м",
-            "available": True,
-            "description": "Карьерный песок, фракция 0-5 мм, для строительных работ"
-        },
-        {
-            "id": 5,
-            "name": "Песок речной",
-            "product_type": "песок",
-            "mark": None,
-            "fraction": "0-2",
-            "price_per_unit": 1200,
-            "unit": "куб.м",
-            "available": True,
-            "description": "Речной песок, фракция 0-2 мм, высокое качество"
-        },
-        {
-            "id": 6,
-            "name": "Щебень гранитный 20-40",
-            "product_type": "щебень",
-            "mark": None,
-            "fraction": "20-40",
-            "price_per_unit": 2500,
-            "unit": "куб.м",
-            "available": True,
-            "description": "Гранитный щебень фракции 20-40 мм, для бетона и дорожных работ"
-        },
-        {
-            "id": 7,
-            "name": "Щебень гранитный 5-20",
-            "product_type": "щебень",
-            "mark": None,
-            "fraction": "5-20",
-            "price_per_unit": 2800,
-            "unit": "куб.м",
-            "available": True,
-            "description": "Гранитный щебень фракции 5-20 мм, мелкая фракция"
-        },
-        {
-            "id": 8,
-            "name": "Гравий 20-40",
-            "product_type": "гравий",
-            "mark": None,
-            "fraction": "20-40",
-            "price_per_unit": 1800,
-            "unit": "куб.м",
-            "available": True,
-            "description": "Гравий фракции 20-40 мм, природный материал"
-        }
-    ]
-    
-    # Filter products based on specifications
-    filtered_products = []
-    
-    for product in mock_products:
-        match = True
-        
-        # Filter by product type
-        if specs.product_type:
-            if product["product_type"].lower() != specs.product_type.lower():
-                match = False
-                continue
-        
-        # Filter by mark (for бетон)
-        if specs.characteristics and specs.characteristics.mark:
-            if product.get("mark") and product["mark"] != specs.characteristics.mark:
-                match = False
-                continue
-        
-        # Filter by fraction (for щебень, гравий, песок)
-        if specs.characteristics and specs.characteristics.fraction:
-            if product.get("fraction") and product["fraction"] != specs.characteristics.fraction:
-                match = False
-                continue
-        
-        if match:
-            filtered_products.append(product)
-    
-    # If no products match exactly, return products matching at least product_type
-    if not filtered_products and specs.product_type:
-        for product in mock_products:
-            if product["product_type"].lower() == specs.product_type.lower():
-                filtered_products.append(product)
-    
-    # If still no products, return all products (fallback)
-    if not filtered_products:
-        filtered_products = mock_products[:3]  # Return first 3 as examples
-    
-    return filtered_products
+class ProductDatabase:
+    def __init__(self, db_url: str, echo: bool = False):
+        self.engine = create_engine(db_url, echo=echo)
+        self.init_db()
 
+    def init_db(self):
+        Base.metadata.create_all(self.engine)
+
+    def seed_from_json(self, seeds_dir: str):
+        import os
+        import json
+        from sqlalchemy.orm import Session
+        from .db_models import Store, Product
+
+        with Session(self.engine) as session:
+            for filename in os.listdir(seeds_dir):
+                if not filename.endswith(".json"):
+                    continue
+
+                path = os.path.join(seeds_dir, filename)
+                with open(path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+
+                # --- создаём магазин ---
+                store_info = data["store"]
+                store = Store(
+                    name=store_info["name"],
+                    address=store_info.get("address")
+                )
+                session.add(store)
+                session.flush()  # чтобы получить store.id
+
+                # --- создаём товары ---
+                for item in data["products"]:
+                    product = Product(
+                        name=item["name"],
+                        category=item.get("category"),
+                        model=item.get("model"),
+                        fraction=item.get("fraction"),
+                        description=item.get("description"),
+                        price=item.get("price"),
+                        stock=item.get("stock", 0),
+                        unit=item.get("unit", "шт"),
+                        store_id=store.id
+                    )
+                    session.add(product)
+
+            session.commit()
+
+
+    def get_products(self, specs: OrderSpecs, limit=50):
+        with Session(self.engine) as session:
+
+            stmt = select(Product).where(Product.is_active == True)
+
+            if specs.product_type:
+                stmt = stmt.where(Product.category == specs.product_type)
+
+            if specs.characteristics:
+                if specs.characteristics.mark:
+                    stmt = stmt.where(Product.model == specs.characteristics.mark)
+
+                if specs.characteristics.fraction:
+                    stmt = stmt.where(Product.fraction == specs.characteristics.fraction)
+
+            stmt = stmt.limit(limit)
+
+            products = session.scalars(stmt).all()
+
+            result = []
+            for product in products:
+                result.append({
+                    "id": product.id,
+                    "name": product.name,
+                    "product_type": product.category,
+                    "price_per_unit": float(product.price) if product.price else 0.0,
+                    "unit": product.unit,
+                    "available": product.stock > 0,
+                    "description": product.description,
+                    "mark": product.model,
+                    "fraction": product.fraction,
+                    "store": product.store.name if product.store else None,
+                    "store_address": product.store.address if product.store else None,
+                })
+
+            return result

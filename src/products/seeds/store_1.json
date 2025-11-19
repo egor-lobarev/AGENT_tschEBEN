@@ -1,7 +1,0 @@
-{
-"store_name": "СтройМаркет №1",
-"products": [
-{"category": "бетон", "model": "B20", "name": "Бетон B20", "price": 4300, "stock": 120, "unit": "м3", "attributes": {"frost_resistance": "F200", "water_resistance": "W6"}},
-{"category": "песок", "model": "мытый", "name": "Песок мытый", "price": 630, "stock": 210, "unit": "т", "attributes": {}}
-]
-}

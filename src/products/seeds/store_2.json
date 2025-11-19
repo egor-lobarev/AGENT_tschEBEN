@@ -1,7 +1,0 @@
-{
-"store_name": "ДомСтрой",
-"products": [
-{"category": "бетон", "model": "B25", "name": "Бетон B25", "price": 4950, "stock": 80, "unit": "м3", "attributes": {"frost_resistance": "F250"}},
-{"category": "песок", "model": "карьерный", "name": "Песок карьерный", "price": 410, "stock": 300, "unit": "т", "attributes": {}}
-]
-}

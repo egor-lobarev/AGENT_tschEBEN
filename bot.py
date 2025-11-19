@@ -62,6 +62,17 @@ class ConstructionMaterialsBot:
         initialize_rag(retriever)
         
         print("Initializing chains...")
+        from src.database.products_api import ProductDatabase
+
+        self.product_db = ProductDatabase(
+            db_url="sqlite:///data/products.db",
+            echo=False
+        )
+
+        self.product_db.init_db()
+
+        self.product_db.seed_from_json("seeds")
+
         self.classification_chain = ClassificationChain(self.llm)
         self.extraction_chain = ExtractionChain(self.llm)
         self.clarification_chain = ClarificationChain(self.llm)
@@ -70,7 +81,8 @@ class ConstructionMaterialsBot:
             classification_chain=self.classification_chain,
             extraction_chain=self.extraction_chain,
             clarification_chain=self.clarification_chain,
-            llm=self.llm
+            llm=self.llm,
+            product_db=self.product_db 
         )
         
         print("Bot initialized successfully!")
@@ -109,6 +121,8 @@ def main():
     print("=" * 80)
     print("Construction Materials Bot")
     print("=" * 80)
+
+
     
     try:
         # Initialize bot

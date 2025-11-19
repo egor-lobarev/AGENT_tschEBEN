@@ -10,7 +10,6 @@ from src.chains.classification import ClassificationChain
 from src.chains.extraction import ExtractionChain
 from src.chains.clarification import ClarificationChain
 from src.rag.api_wrapper import query_rag  # Uses RAG from this project (src/rag/)
-from src.database.products_api import get_products  # Mock API - replace with real implementation
 
 
 class OrchestratorChain:
@@ -21,7 +20,8 @@ class OrchestratorChain:
         classification_chain: ClassificationChain,
         extraction_chain: ExtractionChain,
         clarification_chain: ClarificationChain,
-        llm
+        llm,
+        product_db
     ):
         """
         Initialize the orchestrator chain.
@@ -36,6 +36,8 @@ class OrchestratorChain:
         self.extraction_chain = extraction_chain
         self.clarification_chain = clarification_chain
         self.llm = llm
+        self.product_db = product_db
+
         
         # Memory for each session (session_id -> memory)
         self.session_memories: dict[str, ChatMessageHistory] = {}
@@ -123,7 +125,7 @@ class OrchestratorChain:
                 )
             else:
                 # Step 6: Get products from database
-                products = get_products(extracted_specs)
+                products = self.product_db.get_products(extracted_specs)
                 
                 # Step 7: Format response with products
                 response_message = self._format_products_response(products, extracted_specs)

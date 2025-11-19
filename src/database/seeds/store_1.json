@@ -1,0 +1,58 @@
+{
+  "store": {
+    "name": "СтройМаркет №1",
+    "address": "Москва, Варшавское ш., 12"
+  },
+  "products": [
+    {
+      "category": "бетон",
+      "model": "B15",
+      "name": "Бетон B15",
+      "description": "Подходит для стяжек и малонагруженных конструкций",
+      "price": 3900,
+      "stock": 80,
+      "unit": "м3",
+      "fraction": null
+    },
+    {
+      "category": "бетон",
+      "model": "B20",
+      "name": "Бетон B20",
+      "description": "Для фундаментов и монолитных стен",
+      "price": 4300,
+      "stock": 120,
+      "unit": "м3",
+      "fraction": null
+    },
+    {
+      "category": "бетон",
+      "model": "B25",
+      "name": "Бетон B25",
+      "description": "Высокая прочность, оптимально для плит перекрытия",
+      "price": 4600,
+      "stock": 75,
+      "unit": "м3",
+      "fraction": null
+    },
+    {
+      "category": "песок",
+      "model": "мытый",
+      "name": "Песок мытый",
+      "description": "Речной мытый песок",
+      "price": 630,
+      "stock": 210,
+      "unit": "т",
+      "fraction": "0-2 мм"
+    },
+    {
+      "category": "песок",
+      "model": "карьерный",
+      "name": "Песок карьерный",
+      "description": "Для подсыпки и бетонных смесей",
+      "price": 480,
+      "stock": 320,
+      "unit": "т",
+      "fraction": "0-3 мм"
+    }
+  ]
+}
