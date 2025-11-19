@@ -4,7 +4,7 @@ Handles document loading, text splitting, embedding, and storage in Qdrant.
 """
 
 import json
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 try:
     from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -15,9 +15,9 @@ except ImportError:
     except ImportError:
         raise ImportError("Please install langchain or langchain-text-splitters")
 from sentence_transformers import SentenceTransformer
+import torch
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams, PointStruct
-from typing import Optional
 
 
 class VectorStore:
@@ -32,7 +32,8 @@ class VectorStore:
         chunk_size: int = 500,
         chunk_overlap: int = 50,
         use_in_memory: bool = False,
-        qdrant_client: Optional[QdrantClient] = None
+        qdrant_client: Optional[QdrantClient] = None,
+        embedding_dtype: Optional[str] = None,
     ):
         """
         Initialize the vector store.
@@ -46,6 +47,8 @@ class VectorStore:
             chunk_overlap: Overlap between chunks
             use_in_memory: If True, use in-memory Qdrant (no Docker/server needed)
             qdrant_client: Optional QdrantClient instance to share (useful for in-memory mode)
+            embedding_dtype: Quantization / dtype for SentenceTransformer weights:
+                             "float32" (default), "float16", "float8", "int8", or "int"
         """
         self.collection_name = collection_name
         
@@ -64,8 +67,23 @@ class VectorStore:
             length_function=len,
         )
         
-        # Initialize embedding model
-        self.embedder = SentenceTransformer(model_name)
+        # Initialize embedding model with optional quantization / dtype
+        dtype_key = (embedding_dtype or "float32").lower()
+        # Map human-readable string to torch dtype
+        if dtype_key == "float16":
+            torch_dtype = torch.float16
+        elif dtype_key in {"float8", "fp8"}:
+            # Use float8 if available, otherwise fall back to float16
+            torch_dtype = getattr(torch, "float8_e4m3fn", torch.float16)
+        elif dtype_key in {"int8", "int"}:
+            torch_dtype = torch.int8
+        else:
+            torch_dtype = torch.float32
+
+        self.embedder = SentenceTransformer(
+            model_name,
+            model_kwargs={"dtype": torch_dtype}
+        )
         self.embedding_dim = self.embedder.get_sentence_embedding_dimension()
         
         # Create collection if it doesn't exist
@@ -127,7 +145,7 @@ class VectorStore:
         Returns:
             List of embedding vectors
         """
-        embeddings = self.embedder.encode(texts, show_progress_bar=False)
+        embeddings = self.embedder.encode(texts, show_progress_bar=True)
         return embeddings.tolist()
     
     def add_documents(self, jsonl_path: str):

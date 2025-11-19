@@ -3,6 +3,8 @@ from src.rag.retriver import Retriever
 from typing import List, Dict, Any, Optional
 from qdrant_client import QdrantClient
 from pathlib import Path
+from config import EMBEDDING_MODEL
+from config.config import EMBEDDING_DTYPE
 
 # Default persistent storage path for Qdrant
 DEFAULT_QDRANT_STORAGE_PATH = "data/qdrant_storage"
@@ -74,7 +76,9 @@ class CustomRetriever:
 def setup_rag_system(
     use_in_memory: bool = False,
     data_path: str = "data/raw/raw_materials.jsonl",
-    qdrant_storage_path: str = DEFAULT_QDRANT_STORAGE_PATH
+    qdrant_storage_path: str = DEFAULT_QDRANT_STORAGE_PATH,
+    embedding_model: Optional[str] = None,
+    embedding_dtype: Optional[str] = None,
 ):
     """
     Set up the RAG system and return components ready for LangChain integration.
@@ -86,6 +90,11 @@ def setup_rag_system(
         use_in_memory: If True, use in-memory Qdrant (data lost on restart)
         data_path: Path to JSONL data file
         qdrant_storage_path: Path to store Qdrant data (only used if use_in_memory=False)
+        embedding_model: Name of embedding model (SentenceTransformer-compatible).
+                         If None, uses EMBEDDING_MODEL from config.
+        embedding_dtype: Quantization / dtype for SentenceTransformer weights:
+                         "float32" (default), "float16", "float8", "int8", or "int".
+                         If None, uses EMBEDDING_DTYPE from config.
         
     Returns:
         Tuple of (vector_store, retriever, custom_retriever)
@@ -113,14 +122,22 @@ def setup_rag_system(
             print(f"Reusing existing persistent Qdrant client at {qdrant_storage_path}...")
         qdrant_client = _shared_qdrant_client
     
+    # Resolve embedding model and dtype (config defaults if not provided)
+    embedding_model = embedding_model or EMBEDDING_MODEL
+    embedding_dtype = embedding_dtype or EMBEDDING_DTYPE
+
     # Initialize vector store with shared client
+    print("Start Vector Store initializating")
     vector_store = VectorStore(
         collection_name="construction_materials",
+        model_name=embedding_model,
+        embedding_dtype=embedding_dtype,
         use_in_memory=use_in_memory,
         qdrant_client=qdrant_client
     )
     
     # Load documents if not already loaded
+    print("Start loading documents")
     info = vector_store.get_collection_info()
     if info['points_count'] == 0:
         print(f"Loading documents from {data_path}...")
@@ -130,9 +147,12 @@ def setup_rag_system(
     else:
         print(f"Using existing vector store with {info['points_count']} chunks (skipping re-embedding)")
     
+    print("Initialize retriever with shared client")
     # Initialize retriever with shared client
     retriever = Retriever(
         collection_name="construction_materials",
+        model_name=embedding_model,
+        embedding_dtype=embedding_dtype,
         use_in_memory=use_in_memory,
         qdrant_client=qdrant_client
     )

@@ -3,9 +3,10 @@ Retriever module for RAG system.
 Handles KNN search using cosine distance in Qdrant.
 """
 
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 from qdrant_client import QdrantClient
 from sentence_transformers import SentenceTransformer
+import torch
 
 
 class Retriever:
@@ -18,7 +19,8 @@ class Retriever:
         qdrant_host: str = "localhost",
         qdrant_port: int = 6333,
         use_in_memory: bool = False,
-        qdrant_client = None
+        qdrant_client: Optional[QdrantClient] = None,
+        embedding_dtype: Optional[str] = None,
     ):
         """
         Initialize the retriever.
@@ -30,6 +32,8 @@ class Retriever:
             qdrant_port: Qdrant server port (ignored if use_in_memory=True or qdrant_client provided)
             use_in_memory: If True, use in-memory Qdrant (no Docker/server needed)
             qdrant_client: Optional QdrantClient instance to share (useful for in-memory mode)
+            embedding_dtype: Quantization / dtype for SentenceTransformer weights:
+                             "float32" (default), "float16", "float8", "int8", or "int"
         """
         self.collection_name = collection_name
         
@@ -40,7 +44,22 @@ class Retriever:
             self.qdrant_client = QdrantClient(":memory:")
         else:
             self.qdrant_client = QdrantClient(host=qdrant_host, port=qdrant_port)
-        self.embedder = SentenceTransformer(model_name)
+
+        # Initialize embedding model with optional quantization / dtype
+        dtype_key = (embedding_dtype or "float32").lower()
+        if dtype_key == "float16":
+            torch_dtype = torch.float16
+        elif dtype_key in {"float8", "fp8"}:
+            torch_dtype = getattr(torch, "float8_e4m3fn", torch.float16)
+        elif dtype_key in {"int8", "int"}:
+            torch_dtype = torch.int8
+        else:
+            torch_dtype = torch.float32
+
+        self.embedder = SentenceTransformer(
+            model_name,
+            model_kwargs={"dtype": torch_dtype}
+        )
     
     def embed_query(self, query: str) -> List[float]:
         """
