@@ -1,0 +1,431 @@
+{
+  "results": [
+    {
+      "query": "Какие характеристики у кирпича М150?",
+      "bot_response": {
+        "message": "Керамические материалы и изделия из легкоплавких глин\n[ править | править код ]\n- Кирпич глиняный обыкновенный пластического прессования изготавливают из глин с отощающими добавками или без них. Кирпич представляет собой параллелепипед. Марки кирпича: 300, 250, 200, 150, 125, 100.\n- Кирпич (камень) керамический пустотелый пластического прессования выпускают для кладки несущих стен одноэтажных и многоэтажных зданий, внутренних помещений, стен и перегородок, облицовки кирпичных стен.\n\nСиликатный кирпич формуют на специальных прессах из тщательно приготовленной однородной смеси чистого кварцевого песка (92—95 %), воздушной извести (5—8 %) и воды (7—8 %). После прессования кирпич запаривают в автоклавах в среде, насыщенной парами, при 175 °C и давлении 0,8 МПа. Изготавливают кирпич одинарный размером 250×120×65 мм и модульный (полуторный) размером 250×120×88 мм; сплошной и пустотелый, лицевой и рядовой. Марка кирпича: 75, 100, 125, 150, 200, 250.\nАрболит\n\n- Кирпич строительный лёгкий изготовляют путём формовки и обжига массы из глин с выгорающими добавками, а также из смесей песка и глин с выгорающими добавками. Размер кирпича: 250×120×88 мм, марки 100, 75, 50, 35. Кирпич глиняный обыкновенный применяют при кладке внутренних и наружных стен, столбов и других частей зданий и сооружений. Кирпич глиняный и керамический пустотелые применяют при кладке внутренних и наружных стен зданий и сооружений выше гидроизоляционного слоя. Кирпич лёгкий\n\nМорозостойкость строительных материалов: свойство насыщенного водой материала выдерживать попеременное замораживание и оттаивание. Количественно морозостойкость оценивается маркой. За марку принимается наибольшее число циклов попеременного замораживания до −20 °C и оттаивания при температуре 12—20 °C, которое выдерживают образцы материала без снижения прочности на сжатие более 15 %; после испытания образцы не должны иметь видимых повреждений — трещин, выкрашивания (потери массы не более 5 %).\n\nвыше гидроизоляционного слоя. Кирпич лёгкий применяют при кладке наружных и внутренних стен зданий с нормальной влажностью внутри помещений.",
+        "query_type": "informational",
+        "needs_clarification": false,
+        "extracted_specs": null
+      },
+      "evaluation": {
+        "score": 0.4,
+        "relevance": 0.2,
+        "completeness": 0.1,
+        "accuracy": 0.1,
+        "clarity": 0.0,
+        "reasoning": "The response is somewhat relevant as it mentions the different types of bricks and their properties, but it does not specifically address the characteristics of М150 brick. The information provided is not complete or accurate for the query, and the response is not clear or well-structured, making it difficult to extract the specific information needed about М150 brick.",
+        "query": "Какие характеристики у кирпича М150?",
+        "response": "Керамические материалы и изделия из легкоплавких глин\n[ править | править код ]\n- Кирпич глиняный обыкновенный пластического прессования изготавливают из глин с отощающими добавками или без них. Кирпич представляет собой параллелепипед. Марки кирпича: 300, 250, 200, 150, 125, 100.\n- Кирпич (камень) керамический пустотелый пластического прессования выпускают для кладки несущих стен одноэтажных и многоэтажных зданий, внутренних помещений, стен и перегородок, облицовки кирпичных стен.\n\nСиликатный кирпич формуют на специальных прессах из тщательно приготовленной однородной смеси чистого кварцевого песка (92—95 %), воздушной извести (5—8 %) и воды (7—8 %). После прессования кирпич запаривают в автоклавах в среде, насыщенной парами, при 175 °C и давлении 0,8 МПа. Изготавливают кирпич одинарный размером 250×120×65 мм и модульный (полуторный) размером 250×120×88 мм; сплошной и пустотелый, лицевой и рядовой. Марка кирпича: 75, 100, 125, 150, 200, 250.\nАрболит\n\n- Кирпич строительный лёгкий изготовляют путём формовки и обжига массы из глин с выгорающими добавками, а также из смесей песка и глин с выгорающими добавками. Размер кирпича: 250×120×88 мм, марки 100, 75, 50, 35. Кирпич глиняный обыкновенный применяют при кладке внутренних и наружных стен, столбов и других частей зданий и сооружений. Кирпич глиняный и керамический пустотелые применяют при кладке внутренних и наружных стен зданий и сооружений выше гидроизоляционного слоя. Кирпич лёгкий\n\nМорозостойкость строительных материалов: свойство насыщенного водой материала выдерживать попеременное замораживание и оттаивание. Количественно морозостойкость оценивается маркой. За марку принимается наибольшее число циклов попеременного замораживания до −20 °C и оттаивания при температуре 12—20 °C, которое выдерживают образцы материала без снижения прочности на сжатие более 15 %; после испытания образцы не должны иметь видимых повреждений — трещин, выкрашивания (потери массы не более 5 %).\n\nвыше гидроизоляционного слоя. Кирпич лёгкий применяют при кладке наружных и внутренних стен зданий с нормальной влажностью внутри помещений.",
+        "query_type": "informational",
+        "needs_clarification": false
+      },
+      "timestamp": "2025-11-19T22:42:33.931838"
+    },
+    {
+      "query": "Какой бетон лучше для фундамента?",
+      "bot_response": {
+        "message": "\"Какое количество бетона вам нужно? (укажите объем или вес) И какая марка бетона вам нужна? (М300, М350, М400)\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": "бетон",
+          "quantity": null,
+          "characteristics": null,
+          "delivery": null
+        }
+      },
+      "evaluation": {
+        "score": 0.4,
+        "relevance": 0.2,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.1,
+        "reasoning": "The response is somewhat relevant as it asks for more information to better assist the user, but it does not directly address the query about which type of concrete is best for a foundation. It is not very complete as it only asks for quantity and grade without providing any guidance on the best type of concrete for a foundation. The accuracy is high as the information requested is correct, but the clarity is low because the response does not clearly explain why this information is needed or how it relates to the user's query.",
+        "query": "Какой бетон лучше для фундамента?",
+        "response": "\"Какое количество бетона вам нужно? (укажите объем или вес) И какая марка бетона вам нужна? (М300, М350, М400)\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-11-19T22:42:36.835923"
+    },
+    {
+      "query": "Хочу заказать доску обрезную 50х150х6000",
+      "bot_response": {
+        "message": "К сожалению, товары по вашим параметрам не найдены. Попробуйте изменить параметры заказа.",
+        "query_type": "order_specification",
+        "needs_clarification": false,
+        "extracted_specs": {
+          "product_type": "None",
+          "quantity": "None",
+          "characteristics": {
+            "mark": "None",
+            "fraction": "None",
+            "product_type": "None"
+          },
+          "delivery": {
+            "address": "None",
+            "date": "None"
+          }
+        }
+      },
+      "evaluation": {
+        "score": 0.5,
+        "relevance": 0.3,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.2,
+        "reasoning": "The response is relevant as it addresses the user's query about ordering a specific type of board. However, it is not very complete as it does not provide any alternative options or further assistance. The accuracy is good as it correctly states that the item is not available. The clarity is good as the message is clear and straightforward.",
+        "query": "Хочу заказать доску обрезную 50х150х6000",
+        "response": "К сожалению, товары по вашим параметрам не найдены. Попробуйте изменить параметры заказа.",
+        "query_type": "order_specification",
+        "needs_clarification": false
+      },
+      "timestamp": "2025-11-19T22:42:43.081574"
+    },
+    {
+      "query": "Какая толщина улитки нужна для кровли?",
+      "bot_response": {
+        "message": "Специально для подземной гидроизоляции существует тоннельная ПВХ мембрана с ярко-жёлтым сигнальным слоем. Это неармированный материал, устойчивый к прорастанию корней и к воздействию микроорганизмов. Сигнальный слой позволяет очень легко обнаружить повреждения гидроизоляционного ковра при монтаже подземной гидроизоляции.\nТПО мембраны состоят из смеси каучука и полипропилена.\nКровельные материалы\n[ править | править код ]\n\n- Кровельные и гидроизоляционные битумно - полимерные наплавляемые материалы ( англ. Membrane roofing ) представляют собой синтетическую ( полиэстер ) или стекловолокнистую ( стеклоткань , стеклохолст) основу, на которую с двух сторон наносится битумно-полимерное вяжущее. Основа пропитана модифицированным битумом ( англ. modified bitumen ), который обладает повышенной устойчивостью к температурным и механическим деформациям. На плоских кровлях и при гидроизоляции фундаментов укладка таких\n\n- Черепицу изготовляют из жирной глины путём обжига при 1000—1100 °C. Доброкачественная черепица при лёгком ударе молотком издаёт чистый, не дребезжащий звук. Она прочна, очень долговечна и огнестойка. Недостатки — большая средняя плотность, утяжеляющая несущую конструкцию крыши, хрупкость, необходимость устраивать крыши с большим уклоном для обеспечения быстрого стока воды.\n\n- Водостойкость характеризуется коэффициентом размягчения kp = Rв/Rс, где Rв — прочность материала насыщенного водой, а Rс — прочность сухого материала. kp меняется от 0 (размокающие глины) до 1 (металлы). Если kp меньше 0,8, то такой материал не используют в строительных конструкциях, находящихся в воде.\n\n- Металлический профнастил — рекомендуемый порядок установки профилированных листов проката:\nКрыша, сделанная при строительстве из листов профнастила, а также любых других кровельных покрытий металла поверхности, эта ситуация организацию жилья, мансардных помещений, также включает в себя применение подкровельной гидроизоляции, которая защищает теплоизоляционный материал слива конденсата.\nДревесные строительные материалы и изделия\n[ править | править код ]\nОбщие сведения",
+        "query_type": "informational",
+        "needs_clarification": false,
+        "extracted_specs": null
+      },
+      "evaluation": {
+        "score": 0.2,
+        "relevance": 0.1,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.1,
+        "reasoning": "The response is largely irrelevant to the user's query about the thickness of 'улитка' (snail) needed for roofing. It provides information about various roofing materials but does not address the specific query. The information given is accurate but not relevant to the question asked. The response is also not well-structured in addressing the user's specific need.",
+        "query": "Какая толщина улитки нужна для кровли?",
+        "response": "Специально для подземной гидроизоляции существует тоннельная ПВХ мембрана с ярко-жёлтым сигнальным слоем. Это неармированный материал, устойчивый к прорастанию корней и к воздействию микроорганизмов. Сигнальный слой позволяет очень легко обнаружить повреждения гидроизоляционного ковра при монтаже подземной гидроизоляции.\nТПО мембраны состоят из смеси каучука и полипропилена.\nКровельные материалы\n[ править | править код ]\n\n- Кровельные и гидроизоляционные битумно - полимерные наплавляемые материалы ( англ. Membrane roofing ) представляют собой синтетическую ( полиэстер ) или стекловолокнистую ( стеклоткань , стеклохолст) основу, на которую с двух сторон наносится битумно-полимерное вяжущее. Основа пропитана модифицированным битумом ( англ. modified bitumen ), который обладает повышенной устойчивостью к температурным и механическим деформациям. На плоских кровлях и при гидроизоляции фундаментов укладка таких\n\n- Черепицу изготовляют из жирной глины путём обжига при 1000—1100 °C. Доброкачественная черепица при лёгком ударе молотком издаёт чистый, не дребезжащий звук. Она прочна, очень долговечна и огнестойка. Недостатки — большая средняя плотность, утяжеляющая несущую конструкцию крыши, хрупкость, необходимость устраивать крыши с большим уклоном для обеспечения быстрого стока воды.\n\n- Водостойкость характеризуется коэффициентом размягчения kp = Rв/Rс, где Rв — прочность материала насыщенного водой, а Rс — прочность сухого материала. kp меняется от 0 (размокающие глины) до 1 (металлы). Если kp меньше 0,8, то такой материал не используют в строительных конструкциях, находящихся в воде.\n\n- Металлический профнастил — рекомендуемый порядок установки профилированных листов проката:\nКрыша, сделанная при строительстве из листов профнастила, а также любых других кровельных покрытий металла поверхности, эта ситуация организацию жилья, мансардных помещений, также включает в себя применение подкровельной гидроизоляции, которая защищает теплоизоляционный материал слива конденсата.\nДревесные строительные материалы и изделия\n[ править | править код ]\nОбщие сведения",
+        "query_type": "informational",
+        "needs_clarification": false
+      },
+      "timestamp": "2025-11-19T22:42:43.157140"
+    },
+    {
+      "query": "Есть ли в наличии арматура А500С диаметром 12 мм?",
+      "bot_response": {
+        "message": "К сожалению, товары по вашим параметрам не найдены. Попробуйте изменить параметры заказа.",
+        "query_type": "order_specification",
+        "needs_clarification": false,
+        "extracted_specs": {
+          "product_type": "None",
+          "quantity": "None",
+          "characteristics": {
+            "mark": "None",
+            "fraction": "None",
+            "product_type": "арматура"
+          },
+          "delivery": {
+            "address": "None",
+            "date": "None"
+          }
+        }
+      },
+      "evaluation": {
+        "score": 0.6,
+        "relevance": 0.3,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.2,
+        "reasoning": "The response is relevant as it addresses the user's query about the availability of a specific product. However, it is not very complete as it does not provide any alternative options or further assistance. The accuracy is good as it correctly states the unavailability. The clarity is good as the message is straightforward.",
+        "query": "Есть ли в наличии арматура А500С диаметром 12 мм?",
+        "response": "К сожалению, товары по вашим параметрам не найдены. Попробуйте изменить параметры заказа.",
+        "query_type": "order_specification",
+        "needs_clarification": false
+      },
+      "timestamp": "2025-11-19T22:42:46.143983"
+    },
+    {
+      "query": "Какой вес у одного кубометра бетона М300?",
+      "bot_response": {
+        "message": "Вот предложения по вашему запросу:\n\n1. Бетон B20 (марка М300)\n   Цена: 4300.0 руб./м3\n   Для фундаментов и монолитных стен\n\n2. Бетон B25 (марка М300)\n   Цена: 4600.0 руб./м3\n   Высокая прочность, оптимально для плит перекрытия\n\n3. Бетон B30 (марка М300)\n   Цена: 4950.0 руб./м3\n   Для несущих конструкций и лестниц\n\n\nДля оформления заказа укажите количество и адрес доставки.",
+        "query_type": "order_specification",
+        "needs_clarification": false,
+        "extracted_specs": {
+          "product_type": "бетон",
+          "quantity": "1 кубометр",
+          "characteristics": {
+            "mark": "М300",
+            "fraction": null,
+            "product_type": null
+          },
+          "delivery": null
+        }
+      },
+      "evaluation": {
+        "score": 0.2,
+        "relevance": 0.1,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.2,
+        "reasoning": "The response is not relevant to the user's query about the weight of one cubic meter of M300 concrete. Instead, it provides pricing and usage information for different types of concrete, which is not what the user asked for. The response is partially clear and accurate in the context of the provided information, but it does not address the user's specific question.",
+        "query": "Какой вес у одного кубометра бетона М300?",
+        "response": "Вот предложения по вашему запросу:\n\n1. Бетон B20 (марка М300)\n   Цена: 4300.0 руб./м3\n   Для фундаментов и монолитных стен\n\n2. Бетон B25 (марка М300)\n   Цена: 4600.0 руб./м3\n   Высокая прочность, оптимально для плит перекрытия\n\n3. Бетон B30 (марка М300)\n   Цена: 4950.0 руб./м3\n   Для несущих конструкций и лестниц\n\n\nДля оформления заказа укажите количество и адрес доставки.",
+        "query_type": "order_specification",
+        "needs_clarification": false
+      },
+      "timestamp": "2025-11-19T22:42:48.731028"
+    },
+    {
+      "query": "Хочу купить гипсокартон, но не знаю какой лучше для ванной комнаты.",
+      "bot_response": {
+        "message": "Листы гипсовые обшивочные изготавливают из гипсового листа, облицованного с двух сторон картоном. Гипсовый лист приготовляют из смеси строительного гипса с минеральными или органическими добавками. Их применяют для внутренней обшивки стен, перегородок, потолков зданий. Различаются гипсокартонные и гипсоволокнистые листы .\n\nПлиты гипсовые для перегородок изготовляют из смеси строительного гипса с минеральными или органическими наполнителями. Плиты выпускают сплошные и пустотелые толщиной 80—100 мм. Гипсовые и гипсобетонные перегородочные плиты применяют для устройства перегородок внутри здания.\n\nразличного назначения и для внутренней облицовки наружных стен зданий. Гипсовые блоки применяются в соответствии со строительными нормами и правилами для самонесущих и ограждающих конструкций жилых, общественных, промышленных и сельскохозяйственных зданий, в основном при малоэтажном строительстве.\n\nБлоки гипсовые вентиляционные изготавливают из строительного гипса с пределом прочности при сжатии 12—13 МПа или из смеси гипсоцементно-пуццоланового вяжущего с добавками. Блоки предназначены для устройства вентиляционных каналов в жилых, общественных и промышленных зданиях.\n\n-\nмраморный и кварцевый щебень используют для отделки помещений, декоративного оформления садовых участков и парков;\n-\nдешевый вторичный щебень можно спокойно применять для заливки бетонных полов в подсобных помещениях.\nДля уплотнения грунтов, устройства дорожек и тротуаров, временных проездов и прочих покрытий, не несущих больших нагрузок, не стоит выбирать дорогой камень с высокой прочностью.\nВопрос эксперту\nВопрос: Какой щебень выбрать для заливки фундамента частного дома?",
+        "query_type": "informational",
+        "needs_clarification": false,
+        "extracted_specs": null
+      },
+      "evaluation": {
+        "score": 0.2,
+        "relevance": 0.1,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.1,
+        "reasoning": "The response is largely irrelevant to the user's query about choosing gypsum board for a bathroom. It provides general information about gypsum products and briefly mentions unrelated topics like marble and quartz gravel. The response does not address the specific needs for a bathroom environment, such as moisture resistance. The information provided is accurate but not relevant to the query. The structure is clear but does not answer the user's question.",
+        "query": "Хочу купить гипсокартон, но не знаю какой лучше для ванной комнаты.",
+        "response": "Листы гипсовые обшивочные изготавливают из гипсового листа, облицованного с двух сторон картоном. Гипсовый лист приготовляют из смеси строительного гипса с минеральными или органическими добавками. Их применяют для внутренней обшивки стен, перегородок, потолков зданий. Различаются гипсокартонные и гипсоволокнистые листы .\n\nПлиты гипсовые для перегородок изготовляют из смеси строительного гипса с минеральными или органическими наполнителями. Плиты выпускают сплошные и пустотелые толщиной 80—100 мм. Гипсовые и гипсобетонные перегородочные плиты применяют для устройства перегородок внутри здания.\n\nразличного назначения и для внутренней облицовки наружных стен зданий. Гипсовые блоки применяются в соответствии со строительными нормами и правилами для самонесущих и ограждающих конструкций жилых, общественных, промышленных и сельскохозяйственных зданий, в основном при малоэтажном строительстве.\n\nБлоки гипсовые вентиляционные изготавливают из строительного гипса с пределом прочности при сжатии 12—13 МПа или из смеси гипсоцементно-пуццоланового вяжущего с добавками. Блоки предназначены для устройства вентиляционных каналов в жилых, общественных и промышленных зданиях.\n\n-\nмраморный и кварцевый щебень используют для отделки помещений, декоративного оформления садовых участков и парков;\n-\nдешевый вторичный щебень можно спокойно применять для заливки бетонных полов в подсобных помещениях.\nДля уплотнения грунтов, устройства дорожек и тротуаров, временных проездов и прочих покрытий, не несущих больших нагрузок, не стоит выбирать дорогой камень с высокой прочностью.\nВопрос эксперту\nВопрос: Какой щебень выбрать для заливки фундамента частного дома?",
+        "query_type": "informational",
+        "needs_clarification": false
+      },
+      "timestamp": "2025-11-19T22:42:50.161449"
+    },
+    {
+      "query": "Сколько стоит куб бетона М200?",
+      "bot_response": {
+        "message": "К сожалению, товары по вашим параметрам не найдены. Попробуйте изменить параметры заказа.",
+        "query_type": "order_specification",
+        "needs_clarification": false,
+        "extracted_specs": {
+          "product_type": "бетон",
+          "quantity": "1 куб",
+          "characteristics": {
+            "mark": "М200",
+            "fraction": null,
+            "product_type": null
+          },
+          "delivery": null
+        }
+      },
+      "evaluation": {
+        "score": 0.1,
+        "relevance": 0.1,
+        "completeness": 0.0,
+        "accuracy": 0.2,
+        "clarity": 0.2,
+        "reasoning": "The response is not relevant to the user's query as it does not provide the cost of a cubic meter of M200 concrete. It is also not complete as it does not offer any alternative solutions or further assistance. However, the information provided is accurate in stating that the product was not found, and the response is clear and well-structured.",
+        "query": "Сколько стоит куб бетона М200?",
+        "response": "К сожалению, товары по вашим параметрам не найдены. Попробуйте изменить параметры заказа.",
+        "query_type": "order_specification",
+        "needs_clarification": false
+      },
+      "timestamp": "2025-11-19T22:42:55.764853"
+    },
+    {
+      "query": "Какой состав у клея для плитки?",
+      "bot_response": {
+        "message": "\"Чтобы оформить заказ, пожалуйста, укажите тип материала, который вам нужен (бетон, песок, щебень, гравий). Также, не забудьте указать необходимое количество и марку материала, если это необходимо для вашего заказа.\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": null,
+          "quantity": null,
+          "characteristics": null,
+          "delivery": null
+        }
+      },
+      "evaluation": {
+        "score": 0.0,
+        "relevance": 0.0,
+        "completeness": 0.0,
+        "accuracy": 0.0,
+        "clarity": 0.0,
+        "reasoning": "The response is completely irrelevant to the user's query about the composition of tile adhesive. It does not address the question at all and instead provides instructions for placing an order, which is not what the user asked for.",
+        "query": "Какой состав у клея для плитки?",
+        "response": "\"Чтобы оформить заказ, пожалуйста, укажите тип материала, который вам нужен (бетон, песок, щебень, гравий). Также, не забудьте указать необходимое количество и марку материала, если это необходимо для вашего заказа.\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-11-19T22:42:58.572435"
+    },
+    {
+      "query": "Можно заказать профнастил С8 с доставкой?",
+      "bot_response": {
+        "message": "\"Чтобы оформить заказ, пожалуйста, укажите тип материала, например бетон, песок, щебень или гравий. Кроме того, пожалуйста, укажите необходимое количество и марку материала, если это необходимо для вашего заказа.\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": null,
+          "quantity": null,
+          "characteristics": null,
+          "delivery": null
+        }
+      },
+      "evaluation": {
+        "score": 0.4,
+        "relevance": 0.1,
+        "completeness": 0.1,
+        "accuracy": 0.1,
+        "clarity": 0.1,
+        "reasoning": "The response is not relevant to the user's query about ordering profiled sheeting (С8) with delivery. It asks for information about different materials (concrete, sand, gravel, etc.) and does not address the specific product mentioned. The response is incomplete as it does not provide any information on how to order the profiled sheeting or arrange delivery. The accuracy is low because the response does not correct or address the user's specific query. The clarity is low because the response does not clearly guide the user on how to proceed with their specific request.",
+        "query": "Можно заказать профнастил С8 с доставкой?",
+        "response": "\"Чтобы оформить заказ, пожалуйста, укажите тип материала, например бетон, песок, щебень или гравий. Кроме того, пожалуйста, укажите необходимое количество и марку материала, если это необходимо для вашего заказа.\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-11-19T22:43:03.000479"
+    },
+    {
+      "query": "Какая разница между пеноблоком и газоблоком?",
+      "bot_response": {
+        "message": "Из ячеистого бетона изготовляют панели однорядной разрезки, стеновые и крупные блоки, однослойные и двухслойные стеновые навесные панели, однослойные плиты междуэтажных и чердачных перекрытий.\n\nБлоки гипсовые пазогребневые применяются при малоэтажном строительстве , а также при возведении перегородок внутри зданий и сооружений промышленного, административного и жилищного направления. Замковое соединение блоков в кладке достигается наличием на каждой из горизонтальных плоскостей соответственно паза и гребня. Соединение паз-гребнь позволяет вести быстрый монтаж стены из пазогребневых блоков. В каждом блоке предусмотрены две сквозные пустоты, позволяющие получать лёгкие конструкции\n\nПеностекло — пористый лёгкий материал, получаемый путём спекания смеси стекольного порошка с газообразователями (известняком, каменным углём). Изготавливают его с открытыми и закрытыми порами. Плиты из пеностекла применяют для теплоизоляции стен, покрытий, перекрытий, утепления полов.\n\nПриготовляют из однородной смеси минерального вяжущего, кремнезёмистого компонента, гипса и воды. Вяжущими материалами служат портландцемент , молотая известь-кипелка. Во время выдержки изделия перед автоклавной обработкой из него выделяется водород, в результате чего в однородной пластично-вязкой вяжущей среде образуются мельчайшие пузырьки. В процессе газовыделения эти пузырьки увеличиваются в размерах, создавая сфероидальные ячейки во всей массе ячеистой бетонной смеси.\n\n- Набор температуры влияет на набор прочности и сроки снятия опалубки, для этого в зимний период так же необходимо следить за температурой бетона на поверхности и внутри ядра. Поэтому в конструкции делают термоскважины или монтируют термопары. При демонтаже опалубки разница температур окружающей среды и ядра бетонной конструкции не должна превышать 15 градусов.\nСм. также\n[ править | править код ]\n- Пенобетон\n- Монолитный пенобетон\n- Ячеистый бетон\n- Цемент\n- Стойкость бетона\n- Бетононасос",
+        "query_type": "informational",
+        "needs_clarification": false,
+        "extracted_specs": null
+      },
+      "evaluation": {
+        "score": 0.2,
+        "relevance": 0.1,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.2,
+        "reasoning": "The response is largely irrelevant to the user's query about the difference between пеноблок and газоблок. It discusses various construction materials and processes but does not directly address the specific question. The information provided is accurate and clear, but it does not fulfill the user's request for a comparison between the two types of blocks. Therefore, the score is low.",
+        "query": "Какая разница между пеноблоком и газоблоком?",
+        "response": "Из ячеистого бетона изготовляют панели однорядной разрезки, стеновые и крупные блоки, однослойные и двухслойные стеновые навесные панели, однослойные плиты междуэтажных и чердачных перекрытий.\n\nБлоки гипсовые пазогребневые применяются при малоэтажном строительстве , а также при возведении перегородок внутри зданий и сооружений промышленного, административного и жилищного направления. Замковое соединение блоков в кладке достигается наличием на каждой из горизонтальных плоскостей соответственно паза и гребня. Соединение паз-гребнь позволяет вести быстрый монтаж стены из пазогребневых блоков. В каждом блоке предусмотрены две сквозные пустоты, позволяющие получать лёгкие конструкции\n\nПеностекло — пористый лёгкий материал, получаемый путём спекания смеси стекольного порошка с газообразователями (известняком, каменным углём). Изготавливают его с открытыми и закрытыми порами. Плиты из пеностекла применяют для теплоизоляции стен, покрытий, перекрытий, утепления полов.\n\nПриготовляют из однородной смеси минерального вяжущего, кремнезёмистого компонента, гипса и воды. Вяжущими материалами служат портландцемент , молотая известь-кипелка. Во время выдержки изделия перед автоклавной обработкой из него выделяется водород, в результате чего в однородной пластично-вязкой вяжущей среде образуются мельчайшие пузырьки. В процессе газовыделения эти пузырьки увеличиваются в размерах, создавая сфероидальные ячейки во всей массе ячеистой бетонной смеси.\n\n- Набор температуры влияет на набор прочности и сроки снятия опалубки, для этого в зимний период так же необходимо следить за температурой бетона на поверхности и внутри ядра. Поэтому в конструкции делают термоскважины или монтируют термопары. При демонтаже опалубки разница температур окружающей среды и ядра бетонной конструкции не должна превышать 15 градусов.\nСм. также\n[ править | править код ]\n- Пенобетон\n- Монолитный пенобетон\n- Ячеистый бетон\n- Цемент\n- Стойкость бетона\n- Бетононасос",
+        "query_type": "informational",
+        "needs_clarification": false
+      },
+      "timestamp": "2025-11-19T22:43:04.396612"
+    },
+    {
+      "query": "Хочу заказать цемент, но не знаю какой марки лучше.",
+      "bot_response": {
+        "message": "\"Какое количество цемента вам нужно? (укажите объем или вес) И какая марка цемента вам нужна? (М300, М350, М400)\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": "цемент",
+          "quantity": null,
+          "characteristics": null,
+          "delivery": {
+            "address": null,
+            "date": null
+          }
+        }
+      },
+      "evaluation": {
+        "score": 0.7,
+        "relevance": 0.3,
+        "completeness": 0.2,
+        "accuracy": 0.2,
+        "clarity": 0.2,
+        "reasoning": "The response is relevant as it addresses the user's query about ordering cement. However, it does not provide information on which cement grade is better, which was the user's main concern. The response is somewhat complete as it asks for necessary details to proceed with the order, but it does not guide the user on choosing the right cement grade. The information is accurate and clear, but the response could be improved by providing more guidance on selecting the appropriate cement grade.",
+        "query": "Хочу заказать цемент, но не знаю какой марки лучше.",
+        "response": "\"Какое количество цемента вам нужно? (укажите объем или вес) И какая марка цемента вам нужна? (М300, М350, М400)\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-11-19T22:43:07.793577"
+    },
+    {
+      "query": "Какой срок службы у металлочерепицы?",
+      "bot_response": {
+        "message": "\"Чтобы оформить заказ, пожалуйста, укажите тип материала, например бетон, песок, щебень или гравий. Также, пожалуйста, укажите необходимое количество и марку материала, если это необходимо.\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": null,
+          "quantity": null,
+          "characteristics": null,
+          "delivery": {
+            "address": null,
+            "date": null
+          }
+        }
+      },
+      "evaluation": {
+        "score": 0.1,
+        "relevance": 0.0,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.2,
+        "reasoning": "The response is completely irrelevant to the user's query about the lifespan of metal roofing. It provides information about ordering materials, which is not what the user asked for. The response is partially complete in terms of order specification but does not address the query. The accuracy is high in the context of order specification, but it's irrelevant here. The clarity is good, but it doesn't help with the user's actual question.",
+        "query": "Какой срок службы у металлочерепицы?",
+        "response": "\"Чтобы оформить заказ, пожалуйста, укажите тип материала, например бетон, песок, щебень или гравий. Также, пожалуйста, укажите необходимое количество и марку материала, если это необходимо.\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-11-19T22:43:10.851210"
+    },
+    {
+      "query": "Есть ли у вас в наличии утеплитель Rockwool?",
+      "bot_response": {
+        "message": "\"Какое количество утеплителя вам нужно? И какая марка утеплителя вам нужна?\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": "утеплитель",
+          "quantity": null,
+          "characteristics": {
+            "mark": null,
+            "fraction": null,
+            "product_type": "Rockwool"
+          },
+          "delivery": null
+        }
+      },
+      "evaluation": {
+        "score": 0.6,
+        "relevance": 0.2,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.1,
+        "reasoning": "The response is somewhat relevant as it attempts to gather more information, but it does not directly answer the user's query about the availability of Rockwool. It is not very complete as it does not provide any information about the availability of the requested product. The accuracy is not applicable as no factual information is provided. The clarity is low because the response does not clearly address the initial question before asking for more details.",
+        "query": "Есть ли у вас в наличии утеплитель Rockwool?",
+        "response": "\"Какое количество утеплителя вам нужно? И какая марка утеплителя вам нужна?\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-11-19T22:43:13.158386"
+    },
+    {
+      "query": "Какие размеры у доски обрезной?",
+      "bot_response": {
+        "message": "\"Что именно вы хотите приобрести? Например, бетон, песок, щебень или гравий?\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": null,
+          "quantity": null,
+          "characteristics": null,
+          "delivery": null
+        }
+      },
+      "evaluation": {
+        "score": 0.1,
+        "relevance": 0.0,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.2,
+        "reasoning": "The response is not relevant to the user's query about the sizes of a sawn board. It asks about different materials instead of providing information about the sizes of the sawn board. The response is partially complete as it lists some materials but does not address the query. The information about the materials is accurate, and the response is clear and well-structured, but it does not answer the user's question.",
+        "query": "Какие размеры у доски обрезной?",
+        "response": "\"Что именно вы хотите приобрести? Например, бетон, песок, щебень или гравий?\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-11-19T22:43:16.503545"
+    }
+  ],
+  "aggregate_metrics": {
+    "total_queries": 15,
+    "average_score": 0.31333333333333335,
+    "min_score": 0.0,
+    "max_score": 0.7,
+    "scores_above_0.7": 1,
+    "scores_above_0.5": 4,
+    "scores_below_0.5": 11
+  },
+  "timestamp": "2025-11-19T22:43:16.503605"
+}

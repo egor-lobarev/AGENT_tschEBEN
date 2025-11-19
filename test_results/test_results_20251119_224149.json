@@ -1,0 +1,583 @@
+{
+  "results": [
+    {
+      "query": "Какие характеристики у арматуры А500С?",
+      "bot_response": {
+        "message": "\"Какой тип стройматериала вам нужен? (бетон, песок, щебень, гравий) И какое количество вам нужно?\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": null,
+          "quantity": null,
+          "characteristics": {
+            "mark": "A500С",
+            "fraction": null,
+            "product_type": null
+          },
+          "delivery": null
+        }
+      },
+      "evaluation": {
+        "score": 0.1,
+        "relevance": 0.0,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.2,
+        "reasoning": "The response is not relevant to the user's query about the characteristics of rebar A500S. It asks about a different type of construction material and quantity, which is not what the user asked for. The completeness is low because it does not provide any information about the rebar. The accuracy is neutral as the information about other materials is correct but irrelevant. The clarity is good as the response is clear and well-structured, but it does not address the user's query.",
+        "query": "Какие характеристики у арматуры А500С?",
+        "response": "\"Какой тип стройматериала вам нужен? (бетон, песок, щебень, гравий) И какое количество вам нужно?\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-11-19T22:40:46.750747"
+    },
+    {
+      "query": "Какой бетон лучше для фундамента?",
+      "bot_response": {
+        "message": "\"Какое количество бетона вам нужно? (укажите объем или вес) И какая марка бетона вам нужна? (М300, М350, М400)\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": "бетон",
+          "quantity": null,
+          "characteristics": null,
+          "delivery": {
+            "address": null,
+            "date": null
+          }
+        }
+      },
+      "evaluation": {
+        "score": 0.5,
+        "relevance": 0.2,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.0,
+        "reasoning": "The response is somewhat relevant as it asks for more information to better assist the user, but it does not directly answer the query about which concrete is best for the foundation. It is not very complete as it does not provide any information about the types of concrete suitable for foundations. The accuracy is high as the questions asked are relevant to specifying an order, but the clarity is low because the response does not clearly address the user's initial question.",
+        "query": "Какой бетон лучше для фундамента?",
+        "response": "\"Какое количество бетона вам нужно? (укажите объем или вес) И какая марка бетона вам нужна? (М300, М350, М400)\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-11-19T22:40:49.884750"
+    },
+    {
+      "query": "Чем отличается кирпич М150 от М200?",
+      "bot_response": {
+        "message": "Силикатный кирпич формуют на специальных прессах из тщательно приготовленной однородной смеси чистого кварцевого песка (92—95 %), воздушной извести (5—8 %) и воды (7—8 %). После прессования кирпич запаривают в автоклавах в среде, насыщенной парами, при 175 °C и давлении 0,8 МПа. Изготавливают кирпич одинарный размером 250×120×65 мм и модульный (полуторный) размером 250×120×88 мм; сплошной и пустотелый, лицевой и рядовой. Марка кирпича: 75, 100, 125, 150, 200, 250.\nАрболит\n\nПокупать цемент лучше в мешках, изготовленных из двух слоев влагостойкой бумаги - он больше защищен от воздействий извне, дольше сохраняет эксплуатационные и технические свойства.\nОтсутствие информации на упаковке может указывать на то, что перед вами некачественный товар, изготовленный в кустарных условиях.\nСоветы эксперта\nВ чем разница между классом цемента от его маркой?\n\nКерамические материалы и изделия из легкоплавких глин\n[ править | править код ]\n- Кирпич глиняный обыкновенный пластического прессования изготавливают из глин с отощающими добавками или без них. Кирпич представляет собой параллелепипед. Марки кирпича: 300, 250, 200, 150, 125, 100.\n- Кирпич (камень) керамический пустотелый пластического прессования выпускают для кладки несущих стен одноэтажных и многоэтажных зданий, внутренних помещений, стен и перегородок, облицовки кирпичных стен.\n\n- Кирпич строительный лёгкий изготовляют путём формовки и обжига массы из глин с выгорающими добавками, а также из смесей песка и глин с выгорающими добавками. Размер кирпича: 250×120×88 мм, марки 100, 75, 50, 35. Кирпич глиняный обыкновенный применяют при кладке внутренних и наружных стен, столбов и других частей зданий и сооружений. Кирпич глиняный и керамический пустотелые применяют при кладке внутренних и наружных стен зданий и сооружений выше гидроизоляционного слоя. Кирпич лёгкий\n\n80\n|\n600 |\n60\n|\n400 |\n40\n|\nПрименение\n[ править ]\nДля обратной засыпки, при благоустройстве дворовых территорий, при производстве раствора для кладки, штукатурных и фундаментных работ, используется для бетонного производства. При производстве железобетонных изделий, бетона высоких марок прочности, при производстве тротуарной плитки, бордюров, колодезных колец используют крупнозернистый песок (Мк 2.2 — 2.5). Мелкий строительный песок используется для приготовления накрывочных растворов.",
+        "query_type": "informational",
+        "needs_clarification": false,
+        "extracted_specs": null
+      },
+      "evaluation": {
+        "score": 0.2,
+        "relevance": 0.1,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.1,
+        "reasoning": "The response is largely irrelevant to the user's query about the difference between brick M150 and M200. It provides general information about brick manufacturing and types, but does not specifically address the difference in strength or properties between the two marks. The information given is accurate but not pertinent to the question asked, making the response incomplete and unclear in the context of the query.",
+        "query": "Чем отличается кирпич М150 от М200?",
+        "response": "Силикатный кирпич формуют на специальных прессах из тщательно приготовленной однородной смеси чистого кварцевого песка (92—95 %), воздушной извести (5—8 %) и воды (7—8 %). После прессования кирпич запаривают в автоклавах в среде, насыщенной парами, при 175 °C и давлении 0,8 МПа. Изготавливают кирпич одинарный размером 250×120×65 мм и модульный (полуторный) размером 250×120×88 мм; сплошной и пустотелый, лицевой и рядовой. Марка кирпича: 75, 100, 125, 150, 200, 250.\nАрболит\n\nПокупать цемент лучше в мешках, изготовленных из двух слоев влагостойкой бумаги - он больше защищен от воздействий извне, дольше сохраняет эксплуатационные и технические свойства.\nОтсутствие информации на упаковке может указывать на то, что перед вами некачественный товар, изготовленный в кустарных условиях.\nСоветы эксперта\nВ чем разница между классом цемента от его маркой?\n\nКерамические материалы и изделия из легкоплавких глин\n[ править | править код ]\n- Кирпич глиняный обыкновенный пластического прессования изготавливают из глин с отощающими добавками или без них. Кирпич представляет собой параллелепипед. Марки кирпича: 300, 250, 200, 150, 125, 100.\n- Кирпич (камень) керамический пустотелый пластического прессования выпускают для кладки несущих стен одноэтажных и многоэтажных зданий, внутренних помещений, стен и перегородок, облицовки кирпичных стен.\n\n- Кирпич строительный лёгкий изготовляют путём формовки и обжига массы из глин с выгорающими добавками, а также из смесей песка и глин с выгорающими добавками. Размер кирпича: 250×120×88 мм, марки 100, 75, 50, 35. Кирпич глиняный обыкновенный применяют при кладке внутренних и наружных стен, столбов и других частей зданий и сооружений. Кирпич глиняный и керамический пустотелые применяют при кладке внутренних и наружных стен зданий и сооружений выше гидроизоляционного слоя. Кирпич лёгкий\n\n80\n|\n600 |\n60\n|\n400 |\n40\n|\nПрименение\n[ править ]\nДля обратной засыпки, при благоустройстве дворовых территорий, при производстве раствора для кладки, штукатурных и фундаментных работ, используется для бетонного производства. При производстве железобетонных изделий, бетона высоких марок прочности, при производстве тротуарной плитки, бордюров, колодезных колец используют крупнозернистый песок (Мк 2.2 — 2.5). Мелкий строительный песок используется для приготовления накрывочных растворов.",
+        "query_type": "informational",
+        "needs_clarification": false
+      },
+      "timestamp": "2025-11-19T22:40:51.577596"
+    },
+    {
+      "query": "Какие размеры у доски обрезной?",
+      "bot_response": {
+        "message": "\"Чтобы помочь вам выбрать правильный материал, пожалуйста, укажите тип товара, например бетон, песок, щебень или гравий.\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": null,
+          "quantity": null,
+          "characteristics": null,
+          "delivery": null
+        }
+      },
+      "evaluation": {
+        "score": 0.1,
+        "relevance": 0.0,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.2,
+        "reasoning": "The response is not relevant to the user's query about the sizes of a sawn board. It asks for clarification about different materials, which is not directly related to the question. The response is partially complete in asking for clarification but does not address the specific query. The information is accurate in the context of asking for clarification, and the response is clear and well-structured.",
+        "query": "Какие размеры у доски обрезной?",
+        "response": "\"Чтобы помочь вам выбрать правильный материал, пожалуйста, укажите тип товара, например бетон, песок, щебень или гравий.\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-11-19T22:40:54.432174"
+    },
+    {
+      "query": "Какой толщины должен быть утеплитель для стен?",
+      "bot_response": {
+        "message": "\"Какой материал вы хотите заказать? (бетон, песок, щебень, гравий) И какая марка бетона или фракция щебня/гравия вам нужна?\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": null,
+          "quantity": null,
+          "characteristics": null,
+          "delivery": {
+            "address": null,
+            "date": null
+          }
+        }
+      },
+      "evaluation": {
+        "score": 0.1,
+        "relevance": 0.0,
+        "completeness": 0.1,
+        "accuracy": 0.1,
+        "clarity": 0.1,
+        "reasoning": "The response is not relevant to the user's query about the thickness of insulation for walls. It asks about ordering materials like concrete, sand, gravel, and the grade of concrete or fraction of gravel, which is unrelated to insulation. The response is partially complete in asking for order specifications but fails to address the user's actual question. The information is accurate in the context of ordering materials but not relevant to the query. The clarity is low because the response does not address the user's concern about insulation thickness.",
+        "query": "Какой толщины должен быть утеплитель для стен?",
+        "response": "\"Какой материал вы хотите заказать? (бетон, песок, щебень, гравий) И какая марка бетона или фракция щебня/гравия вам нужна?\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-11-19T22:40:57.544407"
+    },
+    {
+      "query": "Хочу заказать бетон М300",
+      "bot_response": {
+        "message": "\"Какое количество бетона вам нужно?\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": "бетон",
+          "quantity": null,
+          "characteristics": {
+            "mark": "М300",
+            "fraction": null,
+            "product_type": null
+          },
+          "delivery": null
+        }
+      },
+      "evaluation": {
+        "score": 0.7,
+        "relevance": 0.3,
+        "completeness": 0.2,
+        "accuracy": 0.2,
+        "clarity": 0.2,
+        "reasoning": "The response is relevant as it asks for more information to proceed with the order. However, it is not complete as it does not provide any additional information about the product or the ordering process. The accuracy is high as it correctly identifies the need for more information. The clarity is good as the question is straightforward.",
+        "query": "Хочу заказать бетон М300",
+        "response": "\"Какое количество бетона вам нужно?\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-11-19T22:41:00.547720"
+    },
+    {
+      "query": "Есть ли в наличии профнастил С8?",
+      "bot_response": {
+        "message": "\"Какой тип стройматериала вам нужен? (например, бетон, песок, щебень, гравий) И какая марка бетона или какая фракция щебня/гравия вам нужна? (например, М300, М350, М400 или 20-40, 5-20)\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": null,
+          "quantity": null,
+          "characteristics": null,
+          "delivery": null
+        }
+      },
+      "evaluation": {
+        "score": 0.1,
+        "relevance": 0.0,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.2,
+        "reasoning": "The response is not relevant to the user's query about the availability of profiled sheeting (С8). It asks about unrelated materials (concrete, sand, gravel, etc.) and their specifications, which does not address the user's specific question. The response is partially complete in asking for clarification but is not accurate in the context of the query. The clarity is good, but the response is not helpful for the user's needs.",
+        "query": "Есть ли в наличии профнастил С8?",
+        "response": "\"Какой тип стройматериала вам нужен? (например, бетон, песок, щебень, гравий) И какая марка бетона или какая фракция щебня/гравия вам нужна? (например, М300, М350, М400 или 20-40, 5-20)\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-11-19T22:41:04.635633"
+    },
+    {
+      "query": "Сколько стоит куб щебня фракции 20-40?",
+      "bot_response": {
+        "message": "\"Какая марка щебня вам нужна? (например, 5-10, 10-20, 20-40)\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": "щебень",
+          "quantity": "1 куб",
+          "characteristics": {
+            "mark": null,
+            "fraction": "20-40",
+            "product_type": null
+          },
+          "delivery": null
+        }
+      },
+      "evaluation": {
+        "score": 0.5,
+        "relevance": 0.2,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.2,
+        "reasoning": "The response is somewhat relevant as it addresses the user's query about the price of crushed stone, but it does not directly answer the question. It asks for clarification on the grade of crushed stone, which is not necessary since the user has already specified the grade (20-40). The response is not complete as it does not provide any information about the price. The information is accurate in the sense that it correctly identifies the need for clarification, but it is not directly relevant to the user's query. The response is clear and well-structured, but it does not fully address the user's needs.",
+        "query": "Сколько стоит куб щебня фракции 20-40?",
+        "response": "\"Какая марка щебня вам нужна? (например, 5-10, 10-20, 20-40)\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-11-19T22:41:08.661888"
+    },
+    {
+      "query": "Нужно купить цемент М500, сколько стоит мешок?",
+      "bot_response": {
+        "message": "Вот предложения по вашему запросу:\n\n1. Цемент М500 Д0 (марка М500)\n   Цена: 650.0 руб./мешок\n   Высокопрочный цемент\n\n\nДля оформления заказа укажите количество и адрес доставки.",
+        "query_type": "order_specification",
+        "needs_clarification": false,
+        "extracted_specs": {
+          "product_type": "цемент",
+          "quantity": "1 мешок",
+          "characteristics": {
+            "mark": "М500",
+            "fraction": null,
+            "product_type": "цемент"
+          },
+          "delivery": null
+        }
+      },
+      "evaluation": {
+        "score": 0.9,
+        "relevance": 0.3,
+        "completeness": 0.3,
+        "accuracy": 0.2,
+        "clarity": 0.1,
+        "reasoning": "The response is highly relevant as it directly addresses the user's query about the price of a bag of M500 cement. It is complete as it provides a specific price and a brief description of the product. The information appears accurate, mentioning the exact price and type of cement. The clarity is slightly reduced due to the lack of a clear structure, but it is still understandable.",
+        "query": "Нужно купить цемент М500, сколько стоит мешок?",
+        "response": "Вот предложения по вашему запросу:\n\n1. Цемент М500 Д0 (марка М500)\n   Цена: 650.0 руб./мешок\n   Высокопрочный цемент\n\n\nДля оформления заказа укажите количество и адрес доставки.",
+        "query_type": "order_specification",
+        "needs_clarification": false
+      },
+      "timestamp": "2025-11-19T22:41:11.454610"
+    },
+    {
+      "query": "Какой вес у листа гипсокартона 12,5 мм?",
+      "bot_response": {
+        "message": "\"Чтобы оформить заказ, пожалуйста, укажите тип материала, например бетон, песок, щебень или гравий. Например: бетон М300.\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": null,
+          "quantity": null,
+          "characteristics": null,
+          "delivery": null
+        }
+      },
+      "evaluation": {
+        "score": 0.1,
+        "relevance": 0.0,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.2,
+        "reasoning": "The response is not relevant to the user's query about the weight of a 12.5 mm gypsum board. It asks for order specifications instead. While the response is clear and accurate in its own context, it does not address the user's question at all, making it incomplete for the given query.",
+        "query": "Какой вес у листа гипсокартона 12,5 мм?",
+        "response": "\"Чтобы оформить заказ, пожалуйста, укажите тип материала, например бетон, песок, щебень или гравий. Например: бетон М300.\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-11-19T22:41:14.645705"
+    },
+    {
+      "query": "Можно ли использовать пеноблоки для несущих стен?",
+      "bot_response": {
+        "message": "\"Чтобы оформить заказ, пожалуйста, укажите тип материала, например бетон, песок, щебень или гравий. Это необходимо для того, чтобы мы смогли правильно подготовить ваш заказ.\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": null,
+          "quantity": null,
+          "characteristics": null,
+          "delivery": null
+        }
+      },
+      "evaluation": {
+        "score": 0.1,
+        "relevance": 0.0,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.2,
+        "reasoning": "The response is not relevant to the user's query about using foam blocks for load-bearing walls. It instead asks for order specifications, which is unrelated. The completeness is low as it does not address the query at all. The accuracy is somewhat high because the information about ordering is correct, but it is irrelevant. The clarity is high as the response is well-structured and clear, but it does not address the user's question.",
+        "query": "Можно ли использовать пеноблоки для несущих стен?",
+        "response": "\"Чтобы оформить заказ, пожалуйста, укажите тип материала, например бетон, песок, щебень или гравий. Это необходимо для того, чтобы мы смогли правильно подготовить ваш заказ.\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-11-19T22:41:18.045311"
+    },
+    {
+      "query": "Хочу заказать доску 50х150х6000, есть ли у вас?",
+      "bot_response": {
+        "message": "К сожалению, товары по вашим параметрам не найдены. Попробуйте изменить параметры заказа.",
+        "query_type": "order_specification",
+        "needs_clarification": false,
+        "extracted_specs": {
+          "product_type": "None",
+          "quantity": "None",
+          "characteristics": {
+            "mark": "None",
+            "fraction": "None",
+            "product_type": "None"
+          },
+          "delivery": {
+            "address": "None",
+            "date": "None"
+          }
+        }
+      },
+      "evaluation": {
+        "score": 0.7,
+        "relevance": 0.3,
+        "completeness": 0.2,
+        "accuracy": 0.2,
+        "clarity": 0.0,
+        "reasoning": "The response is relevant as it directly addresses the user's query about the availability of the specified board. It is somewhat complete as it provides a clear answer regarding the availability. The accuracy is assumed to be correct as it is a straightforward response. However, the clarity is low because the response does not clearly state that the specific board is not available and suggests changing the order parameters without providing any alternative options or further assistance.",
+        "query": "Хочу заказать доску 50х150х6000, есть ли у вас?",
+        "response": "К сожалению, товары по вашим параметрам не найдены. Попробуйте изменить параметры заказа.",
+        "query_type": "order_specification",
+        "needs_clarification": false
+      },
+      "timestamp": "2025-11-19T22:41:19.552856"
+    },
+    {
+      "query": "Какие марки кирпича бывают?",
+      "bot_response": {
+        "message": "\"Чтобы мы могли подготовить заказ, пожалуйста, укажите тип материала, который вам нужен (бетон, песок, щебень, гравий). Также, пожалуйста, укажите необходимое количество и марку, если это не бетон (например, М300, М350, М400). Спасибо!\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": null,
+          "quantity": null,
+          "characteristics": null,
+          "delivery": {
+            "address": null,
+            "date": null
+          }
+        }
+      },
+      "evaluation": {
+        "score": 0.1,
+        "relevance": 0.0,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.2,
+        "reasoning": "The response is not relevant to the user's query about types of bricks. It asks for order specifications instead. It is partially complete in asking for order details but does not address the query. The accuracy is high as the information about order specifications is correct, but it is not relevant. The response is clear and well-structured, but it does not answer the user's question.",
+        "query": "Какие марки кирпича бывают?",
+        "response": "\"Чтобы мы могли подготовить заказ, пожалуйста, укажите тип материала, который вам нужен (бетон, песок, щебень, гравий). Также, пожалуйста, укажите необходимое количество и марку, если это не бетон (например, М300, М350, М400). Спасибо!\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-11-19T22:41:23.186216"
+    },
+    {
+      "query": "Сколько стоит тонна песка?",
+      "bot_response": {
+        "message": "\"Какая марка песка вам нужна?\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": "песок",
+          "quantity": "10 тонн",
+          "characteristics": null,
+          "delivery": null
+        }
+      },
+      "evaluation": {
+        "score": 0.5,
+        "relevance": 0.3,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.2,
+        "reasoning": "The response is somewhat relevant as it attempts to clarify the user's query, but it does not directly answer the question about the price of a ton of sand. It is not very complete as it only asks for more information without providing any initial guidance or context. The accuracy is high as it correctly identifies the need for more information, and the clarity is good as the question is straightforward.",
+        "query": "Сколько стоит тонна песка?",
+        "response": "\"Какая марка песка вам нужна?\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-11-19T22:41:26.064713"
+    },
+    {
+      "query": "Какой утеплитель лучше для крыши?",
+      "bot_response": {
+        "message": "Эковата\nЦеллюлозный утеплитель ( эковата ) на 80 % состоит из обработанной целлюлозы (древесное волокно), на 12 % — из антипиренов (борная кислота), и на 8 % — из антисептика (бура). Все составляющие материала являются нетоксичными, нелетучими, безвредными для человека природными компонентами.\n\nПеноизол — универсальный утеплитель , который относится к новому поколению карбамидных теплоизоляционных пенопластов , имеет высокие теплоудерживающие способности, низкую объёмную плотность, стойкость к действию микроорганизмов и грызунов.\nГидроизоляционные и кровельные материалы на основе битумов и полимеров\n[ править | править код ]\n\n[ править | править код ]\nМинеральная вата — спутанное волокно (диаметром 5—12 мкм), получаемое из расплавленной массы горных пород или шлаков либо в процессе распыления её тонкой струи паром под давлением. Минеральную вату используют в качестве теплоизоляции поверхностей с температурой от −200 °C до +600 °C.\nСтеклянная вата — спутанное волокно, получаемое из расплавленного стекла. Её используют для приготовления теплоизоляционных изделий (матов, плит) и теплоизоляции поверхностей.\n\nОбладает отличными тепло- и звукоизоляционными свойствами. Не горит и не поддерживает горение. Абсолютно безопасен для человека и окружающей среды.\nИспользуется для изготовления облегченных конструкций, утепления стен, полов и крыш, в дренажных системах.\nЗерна керамзитового гравия.\nПеностеклянный\n\n[ править | править код ]\nТеплоизоляционные материалы характеризуются малой теплопроводностью и небольшой средней плотностью из-за их пористой структуры. Их классифицируют по характеру строения: жёсткие (плиты, кирпич), гибкие (жгуты, полужёсткие плиты), рыхлые (волокнистые и порошкообразные); в виду основного сырья: органические и неорганические.\nОрганические теплоизоляционные материалы\n[ править | править код ]",
+        "query_type": "informational",
+        "needs_clarification": false,
+        "extracted_specs": null
+      },
+      "evaluation": {
+        "score": 0.6,
+        "relevance": 0.2,
+        "completeness": 0.2,
+        "accuracy": 0.1,
+        "clarity": 0.1,
+        "reasoning": "The response is somewhat relevant as it lists various types of insulation materials, but it does not directly address which one is best for a roof. The completeness is low because it does not provide a clear recommendation or comparison. The accuracy is moderate as the information about the materials is correct, but the response is not well-structured or clear, making it difficult to understand the key points.",
+        "query": "Какой утеплитель лучше для крыши?",
+        "response": "Эковата\nЦеллюлозный утеплитель ( эковата ) на 80 % состоит из обработанной целлюлозы (древесное волокно), на 12 % — из антипиренов (борная кислота), и на 8 % — из антисептика (бура). Все составляющие материала являются нетоксичными, нелетучими, безвредными для человека природными компонентами.\n\nПеноизол — универсальный утеплитель , который относится к новому поколению карбамидных теплоизоляционных пенопластов , имеет высокие теплоудерживающие способности, низкую объёмную плотность, стойкость к действию микроорганизмов и грызунов.\nГидроизоляционные и кровельные материалы на основе битумов и полимеров\n[ править | править код ]\n\n[ править | править код ]\nМинеральная вата — спутанное волокно (диаметром 5—12 мкм), получаемое из расплавленной массы горных пород или шлаков либо в процессе распыления её тонкой струи паром под давлением. Минеральную вату используют в качестве теплоизоляции поверхностей с температурой от −200 °C до +600 °C.\nСтеклянная вата — спутанное волокно, получаемое из расплавленного стекла. Её используют для приготовления теплоизоляционных изделий (матов, плит) и теплоизоляции поверхностей.\n\nОбладает отличными тепло- и звукоизоляционными свойствами. Не горит и не поддерживает горение. Абсолютно безопасен для человека и окружающей среды.\nИспользуется для изготовления облегченных конструкций, утепления стен, полов и крыш, в дренажных системах.\nЗерна керамзитового гравия.\nПеностеклянный\n\n[ править | править код ]\nТеплоизоляционные материалы характеризуются малой теплопроводностью и небольшой средней плотностью из-за их пористой структуры. Их классифицируют по характеру строения: жёсткие (плиты, кирпич), гибкие (жгуты, полужёсткие плиты), рыхлые (волокнистые и порошкообразные); в виду основного сырья: органические и неорганические.\nОрганические теплоизоляционные материалы\n[ править | править код ]",
+        "query_type": "informational",
+        "needs_clarification": false
+      },
+      "timestamp": "2025-11-19T22:41:27.383770"
+    },
+    {
+      "query": "Хочу купить арматуру, какая у вас есть?",
+      "bot_response": {
+        "message": "\"Какое количество арматуры вам нужно? И какая марка арматуры вам нужна?\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": "арматура",
+          "quantity": null,
+          "characteristics": null,
+          "delivery": null
+        }
+      },
+      "evaluation": {
+        "score": 0.7,
+        "relevance": 0.3,
+        "completeness": 0.2,
+        "accuracy": 0.2,
+        "clarity": 0.2,
+        "reasoning": "The response is relevant as it addresses the user's query about purchasing rebar. However, it does not provide any information about the available types or brands of rebar, which would be more informative. The response is somewhat complete in asking for clarification but lacks specific details about the products. The information is accurate in asking for clarification but does not provide factual details about the rebar. The response is clear and well-structured, but it could be more informative.",
+        "query": "Хочу купить арматуру, какая у вас есть?",
+        "response": "\"Какое количество арматуры вам нужно? И какая марка арматуры вам нужна?\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-11-19T22:41:37.005570"
+    },
+    {
+      "query": "Какие размеры у листа ОСБ?",
+      "bot_response": {
+        "message": "\"Чтобы оформить заказ, пожалуйста, укажите тип материала, например бетон, песок, щебень или гравий. Кроме того, пожалуйста, укажите необходимое количество и марку материала, если это необходимо для вашего заказа.\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": null,
+          "quantity": null,
+          "characteristics": null,
+          "delivery": null
+        }
+      },
+      "evaluation": {
+        "score": 0.1,
+        "relevance": 0.0,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.2,
+        "reasoning": "The response is not relevant to the user's query about the sizes of OSB boards. It asks for order specifications instead. While the response is clear and accurate in its own context, it does not address the user's question at all, making it incomplete in the context of the query.",
+        "query": "Какие размеры у листа ОСБ?",
+        "response": "\"Чтобы оформить заказ, пожалуйста, укажите тип материала, например бетон, песок, щебень или гравий. Кроме того, пожалуйста, укажите необходимое количество и марку материала, если это необходимо для вашего заказа.\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-11-19T22:41:40.790858"
+    },
+    {
+      "query": "Есть ли у вас в наличии керамический кирпич?",
+      "bot_response": {
+        "message": "\"Чтобы определить, какой материал вам нужен, пожалуйста, укажите тип товара (бетон, песок, щебень, гравий).\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": null,
+          "quantity": null,
+          "characteristics": null,
+          "delivery": null
+        }
+      },
+      "evaluation": {
+        "score": 0.2,
+        "relevance": 0.1,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.2,
+        "reasoning": "The response is not relevant to the user's query about the availability of ceramic bricks. It asks for clarification about a different set of materials, which is not directly related to the user's question. The response is partially complete in asking for clarification but does not address the specific query. The accuracy is neutral as it does not provide incorrect information, but it is not relevant. The clarity is good as the request is straightforward.",
+        "query": "Есть ли у вас в наличии керамический кирпич?",
+        "response": "\"Чтобы определить, какой материал вам нужен, пожалуйста, укажите тип товара (бетон, песок, щебень, гравий).\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-11-19T22:41:43.876855"
+    },
+    {
+      "query": "Какой бетон нужен для стяжки пола?",
+      "bot_response": {
+        "message": "\"Какое количество бетона вам нужно? И какая марка бетона вам нужна?\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": "бетон",
+          "quantity": null,
+          "characteristics": {
+            "mark": null,
+            "fraction": null,
+            "product_type": null
+          },
+          "delivery": {
+            "address": null,
+            "date": null
+          }
+        }
+      },
+      "evaluation": {
+        "score": 0.2,
+        "relevance": 0.1,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.2,
+        "reasoning": "The response is not directly relevant to the user's query about the type of concrete needed for floor screed. It asks for quantity and brand, which are not what the user is asking for. The response is not complete as it does not provide any information about the type of concrete suitable for floor screed. The accuracy is neutral as the information provided is not incorrect, but it does not answer the question. The clarity is good as the response is straightforward, but it does not address the query.",
+        "query": "Какой бетон нужен для стяжки пола?",
+        "response": "\"Какое количество бетона вам нужно? И какая марка бетона вам нужна?\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-11-19T22:41:46.925556"
+    },
+    {
+      "query": "Хочу заказать профнастил, какие цвета есть?",
+      "bot_response": {
+        "message": "\"Какое количество профнастила вам нужно? (укажите длину и ширину, например, 2х4 метра или 10 штук)\"\n\n\"Какая марка профнастила вам нужна? (например, Т-20, Т-30)\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": "профнастил",
+          "quantity": null,
+          "characteristics": null,
+          "delivery": null
+        }
+      },
+      "evaluation": {
+        "score": 0.4,
+        "relevance": 0.1,
+        "completeness": 0.1,
+        "accuracy": 0.2,
+        "clarity": 0.0,
+        "reasoning": "The response is not relevant to the user's query about the available colors of profiled sheet. It asks for quantity and type, which are not what the user is asking for. The response is incomplete as it does not address the query at all. The accuracy is neutral as the information provided is correct but irrelevant. The clarity is low because the response is not structured to address the user's query.",
+        "query": "Хочу заказать профнастил, какие цвета есть?",
+        "response": "\"Какое количество профнастила вам нужно? (укажите длину и ширину, например, 2х4 метра или 10 штук)\"\n\n\"Какая марка профнастила вам нужна? (например, Т-20, Т-30)\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-11-19T22:41:49.261047"
+    }
+  ],
+  "aggregate_metrics": {
+    "total_queries": 20,
+    "average_score": 0.34500000000000003,
+    "min_score": 0.1,
+    "max_score": 0.9,
+    "scores_above_0.7": 4,
+    "scores_above_0.5": 8,
+    "scores_below_0.5": 12
+  },
+  "timestamp": "2025-11-19T22:41:49.261394"
+}

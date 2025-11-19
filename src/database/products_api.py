@@ -55,9 +55,10 @@ class ProductDatabase:
 
 
     def get_products(self, specs: OrderSpecs, limit=50):
+        print(specs)
         with Session(self.engine) as session:
             if specs.product_type == 'None':
-                print("Error of request. There is no category")
+                print("Error of request. There is no type of product")
 
             stmt = select(Product).where(Product.is_active == True)
 
@@ -65,10 +66,10 @@ class ProductDatabase:
                 stmt = stmt.where(Product.category == specs.product_type)
 
             if specs.characteristics:
-                if specs.characteristics.mark:
+                if specs.characteristics.mark != 'None':
                     stmt = stmt.where(Product.model == specs.characteristics.mark)
 
-                if specs.characteristics.fraction:
+                if specs.characteristics.fraction != 'None':
                     stmt = stmt.where(Product.fraction == specs.characteristics.fraction)
 
             stmt = stmt.limit(limit)

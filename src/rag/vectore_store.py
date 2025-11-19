@@ -155,10 +155,11 @@ class VectorStore:
         Args:
             jsonl_path: Path to JSONL file
         """
+        import hashlib
+        
         documents = self.load_documents(jsonl_path)
         
         points = []
-        point_id = 0
         
         for doc_idx, doc in enumerate(documents):
             content = doc.get('content', '')
@@ -173,6 +174,11 @@ class VectorStore:
             
             # Create points for Qdrant
             for chunk_idx, (chunk, embedding) in enumerate(zip(chunks, embeddings)):
+                # Create a unique ID based on URL, doc index, and chunk index
+                # This prevents duplicates if add_documents is called multiple times
+                unique_id_string = f"{doc.get('url', '')}_{doc_idx}_{chunk_idx}_{hashlib.md5(chunk.encode()).hexdigest()[:8]}"
+                point_id = int(hashlib.md5(unique_id_string.encode()).hexdigest()[:15], 16)  # Use first 15 hex chars as int
+                
                 payload = {
                     'url': doc.get('url', ''),
                     'timestamp': doc.get('timestamp', 0),
@@ -189,9 +195,9 @@ class VectorStore:
                         payload=payload
                     )
                 )
-                point_id += 1
         
         # Upload points to Qdrant in batches
+        # upsert will update existing points with same ID or add new ones
         if points:
             self.qdrant_client.upsert(
                 collection_name=self.collection_name,

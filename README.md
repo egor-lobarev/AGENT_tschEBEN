@@ -38,6 +38,7 @@ print(response.message)
 
 Модуль для работы с базой товаров:
 - `products_api.py` - API для поиска товаров по спецификации
+- `db_models.py` - Схема базы данных
 
 ## Features
 
