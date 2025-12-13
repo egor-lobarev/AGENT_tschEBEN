@@ -47,23 +47,23 @@ class ResponseEvaluator:
             ("system", """You are an expert evaluator for a construction materials chatbot. 
 Your task is to evaluate how well a bot's response answers a user's query.
 
-Evaluate the response on a scale from 0.0 to 1.0 based on:
-1. Relevance: Does the response directly address the query? (0.0-0.3)
-2. Completeness: Is the response complete and informative? (0.0-0.3)
-3. Accuracy: Is the information correct and factual? (0.0-0.2)
-4. Clarity: Is the response clear and well-structured? (0.0-0.2)
+Evaluate the response on a scale from 0 to 10 based on:
+1. Relevance: Does the response directly address the query? (1-10)
+2. Completeness: Is the response complete and informative? (1-10)
+3. Accuracy: Is the information correct and factual? (1-10)
+4. Clarity: Is the response clear and well-structured? (1-10)
 
 Return ONLY a JSON object with the following structure:
 {{
-    "score": <float between 0.0 and 1.0>,
-    "relevance": <float 0.0-0.3>,
-    "completeness": <float 0.0-0.3>,
-    "accuracy": <float 0.0-0.2>,
-    "clarity": <float 0.0-0.2>,
+    "score": <int between 1 and 10>,
+    "relevance": <int 1-10>,
+    "completeness": <int 1-10>,
+    "accuracy": <int 1-10>,
+    "clarity": <int 1-10>,
     "reasoning": "<brief explanation of the score>"
 }}
 
-Be strict but fair. A perfect response gets 1.0, a completely irrelevant response gets 0.0."""),
+Be strict but fair. A perfect response gets 10, a completely irrelevant response gets 0."""),
             ("human", """User Query: {query}
 
 Bot Response: {response}
@@ -123,8 +123,8 @@ Evaluate this response and return the JSON object:""")
             evaluation = json.loads(evaluation_text)
             
             # Validate score is in range
-            if not (0.0 <= evaluation.get("score", 0.0) <= 1.0):
-                evaluation["score"] = max(0.0, min(1.0, evaluation["score"]))
+            if not (0.0 <= evaluation.get("score", 0.0) <= 10):
+                evaluation["score"] = max(0.0, min(10, evaluation["score"]))
             
             # Add metadata
             evaluation["query"] = query
@@ -137,11 +137,11 @@ Evaluate this response and return the JSON object:""")
         except json.JSONDecodeError as e:
             # Fallback if JSON parsing fails
             return {
-                "score": 0.5,  # Neutral score if evaluation fails
-                "relevance": 0.15,
-                "completeness": 0.15,
-                "accuracy": 0.1,
-                "clarity": 0.1,
+                "score": 5,  # Neutral score if evaluation fails
+                "relevance": 5,
+                "completeness": 5,
+                "accuracy": 5,
+                "clarity": 5,
                 "reasoning": f"Failed to parse evaluation: {str(e)}",
                 "error": str(e),
                 "query": query,
@@ -157,11 +157,11 @@ Evaluate this response and return the JSON object:""")
             if is_rate_limit:
                 # Return a neutral score for rate limit errors instead of 0
                 return {
-                    "score": 0.5,  # Neutral score for rate limit errors
-                    "relevance": 0.15,
-                    "completeness": 0.15,
-                    "accuracy": 0.1,
-                    "clarity": 0.1,
+                    "score": 5,  # Neutral score for rate limit errors
+                    "relevance": 5,
+                    "completeness": 5,
+                    "accuracy": 5,
+                    "clarity": 5,
                     "reasoning": f"Rate limit error - could not evaluate. Consider using a smaller model (mistral-small or mistral-tiny) or wait before retrying.",
                     "error": error_str,
                     "rate_limit_error": True,

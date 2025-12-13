@@ -1,0 +1,106 @@
+{
+  "results": [
+    {
+      "query": "Какие характеристики у бетона М300?",
+      "bot_response": {
+        "message": "Бетон М300 имеет прочность на сжатие, устанавливающуюся в 30 МПа (согласно ГОСТу 26633-91). Кроме того, он может обладать различными другими характеристиками, такими как прочность на изгиб, морозостойкость и водонепроницаемость, но эти показатели зависят от конкретного состава бетона и не всегда указаны маркой. Чтобы получить точную информацию о конкретном бетоне М300, рекомендуется обратиться к производителю или провести соответствующие тесты.\n\nДля покупки бетона М300 можно обратиться к местным строительным материалам или заказать его в интернет-магазине строительных материалов.\n\n Пишите если определились с товаром и количеством! Или задайте ещё вопросы)",
+        "query_type": "informational",
+        "needs_clarification": false,
+        "extracted_specs": null
+      },
+      "evaluation": {
+        "score": 8,
+        "relevance": 9,
+        "completeness": 8,
+        "accuracy": 9,
+        "clarity": 8,
+        "reasoning": "The response is highly relevant as it directly addresses the query about the characteristics of М300 concrete. It provides accurate information about the compressive strength and mentions other potential characteristics. However, it could be more complete by providing more specific details about typical values for other characteristics like tensile strength, frost resistance, and water resistance. The clarity is good, but the ending seems a bit promotional and slightly off-topic, which slightly reduces the overall score.",
+        "query": "Какие характеристики у бетона М300?",
+        "response": "Бетон М300 имеет прочность на сжатие, устанавливающуюся в 30 МПа (согласно ГОСТу 26633-91). Кроме того, он может обладать различными другими характеристиками, такими как прочность на изгиб, морозостойкость и водонепроницаемость, но эти показатели зависят от конкретного состава бетона и не всегда указаны маркой. Чтобы получить точную информацию о конкретном бетоне М300, рекомендуется обратиться к производителю или провести соответствующие тесты.\n\nДля покупки бетона М300 можно обратиться к местным строительным материалам или заказать его в интернет-магазине строительных материалов.\n\n Пишите если определились с товаром и количеством! Или задайте ещё вопросы)",
+        "query_type": "informational",
+        "needs_clarification": false
+      },
+      "timestamp": "2025-12-13T19:04:52.280625"
+    },
+    {
+      "query": "Хочу заказать бетон М300",
+      "bot_response": {
+        "message": "\"Какое количество бетона вам нужно?\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": "бетон",
+          "quantity": null,
+          "characteristics": {
+            "mark": "М300",
+            "fraction": null,
+            "product_type": null
+          },
+          "delivery": null
+        }
+      },
+      "evaluation": {
+        "score": 7,
+        "relevance": 8,
+        "completeness": 6,
+        "accuracy": 10,
+        "clarity": 8,
+        "reasoning": "The response is relevant as it asks for more information to proceed with the order. It is accurate and clear, but it could be more complete by providing additional guidance or options related to ordering concrete M300.",
+        "query": "Хочу заказать бетон М300",
+        "response": "\"Какое количество бетона вам нужно?\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-12-13T19:04:55.000803"
+    },
+    {
+      "query": "Нужен песок для строительства",
+      "bot_response": {
+        "message": "\"Какое количество песка вам нужно? (укажите объем или вес)\n\nКакая марка песка вам нужна? (например, песок речной, песок строительный)\"",
+        "query_type": "order_specification",
+        "needs_clarification": true,
+        "extracted_specs": {
+          "product_type": "песок",
+          "quantity": null,
+          "characteristics": null,
+          "delivery": {
+            "address": null,
+            "date": null
+          }
+        }
+      },
+      "evaluation": {
+        "score": 8,
+        "relevance": 9,
+        "completeness": 8,
+        "accuracy": 10,
+        "clarity": 8,
+        "reasoning": "The response is highly relevant as it directly addresses the user's query about needing sand for construction. It is complete and informative by asking for the quantity and type of sand, which are essential details for specifying an order. The information is accurate and the response is clear and well-structured, making it easy for the user to provide the necessary details. The score is slightly less than perfect due to the lack of additional information or options that could further assist the user.",
+        "query": "Нужен песок для строительства",
+        "response": "\"Какое количество песка вам нужно? (укажите объем или вес)\n\nКакая марка песка вам нужна? (например, песок речной, песок строительный)\"",
+        "query_type": "order_specification",
+        "needs_clarification": true
+      },
+      "timestamp": "2025-12-13T19:04:58.495279"
+    }
+  ],
+  "aggregate_metrics": {
+    "total_queries": 3,
+    "average_score": 7.666666666666667,
+    "min_score": 7,
+    "max_score": 8,
+    "scores_above_7": 3,
+    "scores_above_5": 3,
+    "scores_below_5": 0,
+    "average_relevance": 8.666666666666666,
+    "average_completeness": 7.333333333333333,
+    "average_accuracy": 9.666666666666666,
+    "average_clarity": 8.0,
+    "reasoning": [
+      "The response is highly relevant as it directly addresses the query about the characteristics of М300 concrete. It provides accurate information about the compressive strength and mentions other potential characteristics. However, it could be more complete by providing more specific details about typical values for other characteristics like tensile strength, frost resistance, and water resistance. The clarity is good, but the ending seems a bit promotional and slightly off-topic, which slightly reduces the overall score.",
+      "The response is relevant as it asks for more information to proceed with the order. It is accurate and clear, but it could be more complete by providing additional guidance or options related to ordering concrete M300.",
+      "The response is highly relevant as it directly addresses the user's query about needing sand for construction. It is complete and informative by asking for the quantity and type of sand, which are essential details for specifying an order. The information is accurate and the response is clear and well-structured, making it easy for the user to provide the necessary details. The score is slightly less than perfect due to the lack of additional information or options that could further assist the user."
+    ]
+  },
+  "timestamp": "2025-12-13T19:04:58.495516"
+}

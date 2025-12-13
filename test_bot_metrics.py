@@ -16,6 +16,29 @@ from src.testing.query_generator import QueryGenerator
 from src.testing.simulated_buyer import SimulatedBuyer
 
 
+def pydantic_to_dict(model) -> Dict[str, Any]:
+    """
+    Convert Pydantic model to dictionary (compatible with both v1 and v2).
+    
+    Args:
+        model: Pydantic model instance or None
+        
+    Returns:
+        Dictionary representation of the model or None
+    """
+    if model is None:
+        return None
+    # Try Pydantic v2 method first
+    if hasattr(model, 'model_dump'):
+        return model.model_dump()
+    # Fallback to Pydantic v1 method
+    elif hasattr(model, 'dict'):
+        return model.dict()
+    else:
+        # Last resort: convert manually
+        return dict(model)
+
+
 class BotTester:
     """Main testing class for bot evaluation."""
     
@@ -92,7 +115,7 @@ class BotTester:
             response=bot_response.message,
             query_type=bot_response.query_type,
             needs_clarification=bot_response.needs_clarification,
-            extracted_specs=bot_response.extracted_specs.dict() if bot_response.extracted_specs else None
+            extracted_specs=pydantic_to_dict(bot_response.extracted_specs)
         )
         
         print(f"\nEvaluation Results:")
@@ -110,7 +133,7 @@ class BotTester:
                 "message": bot_response.message,
                 "query_type": bot_response.query_type,
                 "needs_clarification": bot_response.needs_clarification,
-                "extracted_specs": bot_response.extracted_specs.dict() if bot_response.extracted_specs else None
+                "extracted_specs": pydantic_to_dict(bot_response.extracted_specs)
             },
             "evaluation": evaluation,
             "timestamp": datetime.now().isoformat()
@@ -242,20 +265,51 @@ class BotTester:
         
         # Calculate aggregate metrics
         all_scores = []
+        all_relevance = []
+        all_completeness = []
+        all_accuracy = []
+        all_clarity = []
+        all_reasoning = []
+        
         for result in results:
             if "evaluation" in result:
-                all_scores.append(result["evaluation"]["score"])
+                eval_data = result["evaluation"]
+                all_scores.append(eval_data.get("score", 0))
+                all_relevance.append(eval_data.get("relevance", 0))
+                all_completeness.append(eval_data.get("completeness", 0))
+                all_accuracy.append(eval_data.get("accuracy", 0))
+                all_clarity.append(eval_data.get("clarity", 0))
+                if "reasoning" in eval_data and eval_data["reasoning"]:
+                    all_reasoning.append(eval_data["reasoning"])
             elif "average_score" in result:
+                # For simulated buyer conversations, we only have average_score
                 all_scores.append(result["average_score"])
+            elif "conversation" in result:
+                # Extract metrics from conversation turns
+                for turn in result.get("conversation", []):
+                    if "evaluation" in turn:
+                        eval_data = turn["evaluation"]
+                        all_scores.append(eval_data.get("score", 0))
+                        all_relevance.append(eval_data.get("relevance", 0))
+                        all_completeness.append(eval_data.get("completeness", 0))
+                        all_accuracy.append(eval_data.get("accuracy", 0))
+                        all_clarity.append(eval_data.get("clarity", 0))
+                        if "reasoning" in eval_data and eval_data["reasoning"]:
+                            all_reasoning.append(eval_data["reasoning"])
         
         aggregate_metrics = {
             "total_queries": len(queries),
             "average_score": sum(all_scores) / len(all_scores) if all_scores else 0.0,
             "min_score": min(all_scores) if all_scores else 0.0,
             "max_score": max(all_scores) if all_scores else 0.0,
-            "scores_above_0.7": sum(1 for s in all_scores if s >= 0.7),
-            "scores_above_0.5": sum(1 for s in all_scores if s >= 0.5),
-            "scores_below_0.5": sum(1 for s in all_scores if s < 0.5)
+            "scores_above_7": sum(1 for s in all_scores if s >= 7),
+            "scores_above_5": sum(1 for s in all_scores if s >= 5),
+            "scores_below_5": sum(1 for s in all_scores if s < 5),
+            "average_relevance": sum(all_relevance) / len(all_relevance) if all_relevance else 0.0,
+            "average_completeness": sum(all_completeness) / len(all_completeness) if all_completeness else 0.0,
+            "average_accuracy": sum(all_accuracy) / len(all_accuracy) if all_accuracy else 0.0,
+            "average_clarity": sum(all_clarity) / len(all_clarity) if all_clarity else 0.0,
+            "reasoning": all_reasoning  # Collect all reasoning texts
         }
         
         print(f"\n{'='*80}")
@@ -264,11 +318,16 @@ class BotTester:
         print(f"\nAggregate Metrics:")
         print(f"  Total Queries: {aggregate_metrics['total_queries']}")
         print(f"  Average Score: {aggregate_metrics['average_score']:.3f}")
+        print(f"  Average Relevance: {aggregate_metrics['average_relevance']:.3f}")
+        print(f"  Average Completeness: {aggregate_metrics['average_completeness']:.3f}")
+        print(f"  Average Accuracy: {aggregate_metrics['average_accuracy']:.3f}")
+        print(f"  Average Clarity: {aggregate_metrics['average_clarity']:.3f}")
         print(f"  Min Score: {aggregate_metrics['min_score']:.3f}")
         print(f"  Max Score: {aggregate_metrics['max_score']:.3f}")
-        print(f"  Scores ≥ 0.7: {aggregate_metrics['scores_above_0.7']}")
-        print(f"  Scores ≥ 0.5: {aggregate_metrics['scores_above_0.5']}")
-        print(f"  Scores < 0.5: {aggregate_metrics['scores_below_0.5']}")
+        print(f"  Scores ≥ 7: {aggregate_metrics['scores_above_7']}")
+        print(f"  Scores ≥ 5: {aggregate_metrics['scores_above_5']}")
+        print(f"  Scores < 5: {aggregate_metrics['scores_below_5']}")
+        print(f"  Total Reasoning Texts: {len(aggregate_metrics['reasoning'])}")
         
         return {
             "results": results,

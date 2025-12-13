@@ -301,6 +301,67 @@ python test_retriever.py
 
 The test verifies that the retriever can find top 2 documents by query.
 
+### Bot Evaluation and Metrics
+
+The system includes comprehensive evaluation metrics for testing bot responses. Run evaluation tests using:
+
+```bash
+python test_bot_metrics.py
+```
+
+#### Evaluation Metrics
+
+The evaluation system calculates the following metrics for each bot response:
+
+**Individual Response Metrics (per query):**
+- **score** (1-10): Overall quality score
+- **relevance** (1-10): How well the response addresses the query
+- **completeness** (1-10): How complete and informative the response is
+- **accuracy** (1-10): How correct and factual the information is
+- **clarity** (1-10): How clear and well-structured the response is
+- **reasoning**: Text explanation of the evaluation
+
+**Usage Examples:**
+
+# Run evaluation with default queries
+python test_bot_metrics.py
+
+# Run with specific queries
+python test_bot_metrics.py --queries "Нужен бетон М300" "Какие характеристики у бетона?"
+
+# Run with simulated buyer (multi-turn conversations)
+python test_bot_metrics.py --simulated-buyer
+
+# Save results to specific file
+python test_bot_metrics.py --save-results my_results.json
+Results are saved to `test_results/` directory with timestamped filenames.
+
+#### Example Results
+
+**Individual Query Results:**
+
+| Query | Type | Score | Relevance | Completeness | Accuracy | Clarity | Needs Clarification |
+|-------|------|-------|-----------|--------------|----------|---------|---------------------|
+| "Какие характеристики у бетона М300?" | informational | 8 | 9 | 8 | 9 | 8 | No |
+| "Хочу заказать бетон М300" | order_specification | 7 | 8 | 6 | 10 | 8 | Yes |
+| "Нужен песок для строительства" | order_specification | 8 | 9 | 8 | 10 | 8 | Yes |
+
+**Aggregate Metrics Summary:**
+
+| Metric | Value |
+|--------|-------|
+| Total Queries | 3 |
+| Average Score | 7.67 |
+| Min Score | 7 |
+| Max Score | 8 |
+| Scores ≥ 7 | 3 |
+| Scores ≥ 5 | 3 |
+| Scores < 5 | 0 |
+| Average Relevance | 8.67 |
+| Average Completeness | 7.33 |
+| Average Accuracy | 9.67 |
+| Average Clarity | 8.0 |
+
 ### Inspect Database
 
 View the contents of your database and see how text is split:
