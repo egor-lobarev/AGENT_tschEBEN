@@ -27,7 +27,7 @@ class ClassificationChain:
 Твоя задача - определить тип запроса пользователя.
 
 Типы запросов:
-1. "informational" - информационный вопрос (например: "Какие характеристики у бетона М300?", "Что такое гравий?", "Как выбрать бетон?")
+1. "informational" - информационный вопрос (например: "Какие характеристики у бетона М300?", "Что такое гравий?", "Как выбрать бетон?, "Какой бетон подойдёт для фундамента?"")
 2. "order_specification" - спецификация заказа (например: "Нужен бетон М300", "Хочу заказать 5 кубов песка", "Мне нужен щебень 20-40")
 
 Определи тип запроса и верни только одно слово: "informational" или "order_specification"."""),
@@ -56,6 +56,7 @@ class ClassificationChain:
         
         # Clean and normalize the result
         result = result.strip().lower()
+        print("ответ классифицакиционной сетки", result)
         
         # Extract the classification
         if "informational" in result or "информационный" in result.lower():

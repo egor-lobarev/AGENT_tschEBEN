@@ -1,46 +1,43 @@
 """
-RAG API wrapper for integration with LangChain chains.
-Provides query_rag function as specified in the requirements.
-
-This module uses the project's RAG system:
-- src.rag.generator.RAGGenerator - generates responses from retrieved documents
-- src.rag.retriver.Retriever - retrieves relevant documents from Qdrant
-- src.rag.vectore_store.VectorStore - stores document embeddings
-
-The query_rag() function is used by OrchestratorChain for informational queries.
+Enhanced RAG API wrapper for integration with LangChain chains.
+Provides query_rag function with conversation context support.
 """
 
 from typing import Optional
-from src.rag.generator import RAGGenerator  # Project's RAG generator
-from src.rag.retriver import Retriever  # Project's retriever
+from src.rag.generator import RAGGenerator
+from src.rag.retriver import Retriever
 
 
 # Global RAG generator instance (will be initialized by bot)
 _rag_generator: Optional[RAGGenerator] = None
 
 
-def initialize_rag(retriever: Retriever) -> None:
+def initialize_rag(retriever: Retriever, llm=None) -> None:
     """
-    Initialize the RAG generator with a retriever.
+    Initialize the RAG generator with a retriever and optional LLM.
     
     Args:
         retriever: Retriever instance for document retrieval
+        llm: Optional LLM instance for generating natural responses
     """
     global _rag_generator
-    _rag_generator = RAGGenerator(retriever)
+    _rag_generator = RAGGenerator(retriever, llm=llm)
 
 
-def query_rag(question: str, top_k: int = 5) -> str:
+def query_rag(
+    question: str, 
+    top_k: int = 5, 
+    conversation_context: str = "",
+    min_score: float = 0.3
+) -> str:
     """
-    Query the RAG system and return a formatted response.
-    This is the API function for Саша's RAG module.
-    
-    Uses the project's RAG system (src/rag/generator.py, src/rag/retriver.py).
-    Called by OrchestratorChain for informational queries.
+    Query the RAG system and return a formatted response with enhanced prompt engineering.
     
     Args:
         question: User question
         top_k: Number of documents to retrieve
+        conversation_context: Optional conversation history for context-aware responses
+        min_score: Minimum similarity score for document filtering
         
     Returns:
         Formatted response string with relevant information
@@ -51,20 +48,14 @@ def query_rag(question: str, top_k: int = 5) -> str:
     if _rag_generator is None:
         raise RuntimeError("RAG system not initialized. Call initialize_rag() first.")
     
-    # Generate response using project's RAG generator (src/rag/generator.py)
-    result = _rag_generator.generate(question, top_k=top_k)
+    # Generate response using enhanced RAG generator
+    result = _rag_generator.generate(
+        query=question,
+        top_k=top_k,
+        conversation_context=conversation_context,
+        min_score=min_score,
+        use_llm=True
+    )
     
-    # Extract and format the response
-    # For now, return the context from retrieved documents
-    # In a full implementation, this could use an LLM to generate a natural response
-    if result['retrieved_documents']:
-        # Format as a readable response
-        context_parts = []
-        for i, doc in enumerate(result['retrieved_documents'], 1):
-            context_parts.append(f"{doc['text']}")
-        
-        response = "\n\n".join(context_parts)
-        return response
-    else:
-        return "К сожалению, не удалось найти релевантную информацию по вашему запросу."
+    return result.get('response', 'К сожалению, не удалось сгенерировать ответ.')
 

@@ -59,7 +59,7 @@ class ConstructionMaterialsBot:
             data_path=data_path
         )
         
-        initialize_rag(retriever)
+        initialize_rag(retriever, llm=self.llm)
         
         print("Launch database...")
         from src.database.products_api import ProductDatabase
