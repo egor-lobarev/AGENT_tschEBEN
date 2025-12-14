@@ -21,10 +21,15 @@ class ClarificationChain:
         """
         self.llm = llm
         
-        # Prompt for clarification
+        # Enhanced prompt for clarification with conversation context
         self.prompt = ChatPromptTemplate.from_messages([
             ("system", """Ты помощник интернет-магазина стройматериалов. 
 Твоя задача - сгенерировать уточняющий вопрос пользователю, чтобы получить недостающую информацию для заказа.
+
+Учитывай контекст разговора: если пользователь уже отвечал на похожие вопросы, формулируй вопрос по-другому или более конкретно.
+
+КОНТЕКСТ РАЗГОВОРА:
+{conversation_context}
 
 Проанализируй, какие параметры уже есть, а каких не хватает.
 Сгенерируй ОДИН естественный, дружелюбный вопрос на русском языке, который поможет получить недостающую информацию.
@@ -48,20 +53,27 @@ class ClarificationChain:
         self.chain = (
             {
                 "specs": lambda x: x["specs"],
-                "missing_fields": lambda x: x["missing_fields"]
+                "missing_fields": lambda x: x["missing_fields"],
+                "conversation_context": lambda x: x.get("conversation_context", "")
             }
             | self.prompt
             | self.llm
             | StrOutputParser()
         )
     
-    def generate_question(self, specs: OrderSpecs, missing_fields: list[str]) -> str:
+    def generate_question(
+        self, 
+        specs: OrderSpecs, 
+        missing_fields: list[str],
+        conversation_context: str = ""
+    ) -> str:
         """
-        Generate a clarifying question based on missing fields.
+        Generate a clarifying question based on missing fields with conversation context.
         
         Args:
             specs: Current order specifications
             missing_fields: List of missing field names
+            conversation_context: Optional conversation history for context-aware questions
             
         Returns:
             Clarifying question string
@@ -80,7 +92,8 @@ class ClarificationChain:
         
         result = self.chain.invoke({
             "specs": specs_str,
-            "missing_fields": missing_str
+            "missing_fields": missing_str,
+            "conversation_context": conversation_context if conversation_context else "Контекст отсутствует (первое сообщение в диалоге)."
         })
         
         return result.strip()

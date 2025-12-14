@@ -62,6 +62,37 @@ class OrchestratorChain:
         """Store specifications for a session."""
         self.session_specs[session_id] = specs
     
+    def _format_conversation_context(self, session_id: str, max_turns: int = 4) -> str:
+        """
+        Format conversation history for context-aware responses.
+        
+        Args:
+            session_id: Session identifier
+            max_turns: Maximum number of previous turns to include
+            
+        Returns:
+            Formatted conversation context string
+        """
+        memory = self._get_memory(session_id)
+        messages = memory.messages
+        
+        if not messages:
+            return ""
+        
+        # Format last few messages for context (avoid too long context)
+        context_parts = []
+        # Take last max_turns*2 messages (each turn = user + bot)
+        recent_messages = messages[-(max_turns * 2):] if len(messages) > max_turns * 2 else messages
+        
+        for msg in recent_messages:
+            if hasattr(msg, 'content') and msg.content:
+                role = "Пользователь" if msg.type == "human" else "Бот"
+                context_parts.append(f"{role}: {msg.content}")
+        
+        if context_parts:
+            return "\n".join(context_parts)
+        return ""
+    
     def process(self, user_query: UserQuery) -> BotResponse:
         """
         Process a user query through the complete workflow.
@@ -75,14 +106,29 @@ class OrchestratorChain:
         query = user_query.message
         session_id = user_query.session_id
         
-        # Step 1: Classify the query
-        query_type = self.classification_chain.classify(query)
+        # Get conversation memory
+        memory = self._get_memory(session_id)
+        
+        # Format conversation context for classification
+        conversation_context = self._format_conversation_context(session_id)
+        
+        # Step 1: Classify the query (with context)
+        query_type = self.classification_chain.classify(query, conversation_context=conversation_context)
         
         # Step 2: Route based on classification
         if query_type == "informational":
             # Informational query → RAG (uses project's RAG module: src/rag/)
             try:
-                rag_response = query_rag(query)  # Calls src.rag.api_wrapper.query_rag()
+                # Query RAG with conversation context
+                rag_response = query_rag(
+                    question=query,
+                    conversation_context=conversation_context
+                )
+                
+                # Store in memory
+                memory.add_user_message(query)
+                memory.add_ai_message(rag_response)
+                
                 return BotResponse(
                     message=rag_response,
                     needs_clarification=False,
@@ -90,8 +136,11 @@ class OrchestratorChain:
                     query_type="informational"
                 )
             except Exception as e:
+                error_msg = f"Извините, произошла ошибка при поиске информации: {str(e)}"
+                memory.add_user_message(query)
+                memory.add_ai_message(error_msg)
                 return BotResponse(
-                    message=f"Извините, произошла ошибка при поиске информации: {str(e)}",
+                    message=error_msg,
                     needs_clarification=False,
                     extracted_specs=None,
                     query_type="informational"
@@ -103,19 +152,29 @@ class OrchestratorChain:
             # Get existing specs for this session
             existing_specs = self._get_specs(session_id)
             
-            # Step 3: Extract specifications
-            extracted_specs = self.extraction_chain.extract(query, existing_specs)
+            # Step 3: Extract specifications (with context)
+            extracted_specs = self.extraction_chain.extract(
+                query, 
+                existing_specs,
+                conversation_context=conversation_context
+            )
             
             # Store updated specs
             self._store_specs(session_id, extracted_specs)
             
             # Step 4: Check completeness
             if not extracted_specs.is_complete():
-                # Step 5: Generate clarifying question
+                # Step 5: Generate clarifying question (with context)
                 missing_fields = extracted_specs.get_missing_fields()
                 clarifying_question = self.clarification_chain.generate_question(
-                    extracted_specs, missing_fields
+                    extracted_specs, 
+                    missing_fields,
+                    conversation_context=conversation_context
                 )
+                
+                # Store in memory
+                memory.add_user_message(query)
+                memory.add_ai_message(clarifying_question)
                 
                 return BotResponse(
                     message=clarifying_question,
@@ -129,6 +188,10 @@ class OrchestratorChain:
                 
                 # Step 7: Format response with products
                 response_message = self._format_products_response(products, extracted_specs)
+                
+                # Store in memory
+                memory.add_user_message(query)
+                memory.add_ai_message(response_message)
                 
                 # Clear specs after successful order (optional - can keep for follow-up)
                 # self.session_specs.pop(session_id, None)
