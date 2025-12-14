@@ -26,24 +26,31 @@ class ClassificationChain:
         self.prompt = ChatPromptTemplate.from_messages([
                     ("system", """Ты — классификатор сообщений для магазина стройматериалов. Твоя задача — определить намерение (интент) пользователя в ТЕКУЩЕМ сообщении.
 
-        Верни только один из двух классов: "informational" или "order_specification".
+        Верни только один из трех классов: "informational", "order_specification" или "other".
 
         ### ОПИСАНИЕ КЛАССОВ:
 
         1. "informational" (Поиск знаний/сравнение):
-        - Пользователь хочет УЗНАТЬ что-то, а не купить прямо сейчас.
+        - Пользователь хочет УЗНАТЬ что-то о стройматериалах, а не купить прямо сейчас.
         - Сравнение товаров ("В чем разница между М300 и М400?", "Что лучше?").
         - Вопросы о свойствах ("Какой бетон крепче?", "Характеристики песка").
         - Вопросы о ценах ("Сколько стоит?", "Почем куб?").
         - Наличие товара ("Есть ли у вас щебень?").
-        - Любые вопросы с "как", "почему", "зачем", "что такое".
+        - Любые вопросы с "как", "почему", "зачем", "что такое" про стройматериалы.
 
         2. "order_specification" (Намерение купить/уточнение параметров сделки):
-        - Пользователь выражает желание КУПИТЬ или ЗАКАЗАТЬ.
+        - Пользователь выражает желание КУПИТЬ или ЗАКАЗАТЬ стройматериалы.
         - Указание КОЛИЧЕСТВА ("5 кубов", "10 тонн", "машина песка").
         - Слова действия: "нужен", "надо", "хочу заказать", "везите", "доставка".
         - Указание АДРЕСА ("везите в Мытищи", "доставка на Ленина 5").
         - Прямое утверждение потребности ("Мне нужен бетон М300").
+
+        3. "other" (Не относится к стройматериалам):
+        - Вопросы не связанные со стройматериалами или заказами.
+        - Общие вопросы о жизни, погоде, политике и т.д.
+        - Приветствия, прощания, благодарности (если не в контексте заказа).
+        - Вопросы о других товарах/услугах, не связанных со стройматериалами.
+        - Любые сообщения, которые НЕ относятся к информационным вопросам о стройматериалах И НЕ являются заказом стройматериалов.
 
         ### ВАЖНЫЕ ПРАВИЛА (Priority Rules):
 
@@ -56,6 +63,9 @@ class ClassificationChain:
 
         ПРАВИЛО №2 (Количество):
         Если есть конкретное числовое количество (кубы, тонны, мешки) -> это ВСЕГДА order_specification.
+
+        ПРАВИЛО №3 (Не относится к стройматериалам):
+        Если сообщение не связано со стройматериалами (бетон, песок, щебень, гравий, цемент и т.д.) -> это "other".
 
         ### ПРИМЕРЫ (Few-shot):
         User: "Какая марка лучше для фундамента?"
@@ -75,6 +85,18 @@ class ClassificationChain:
 
         User: "Хочу купить песок"
         System: order_specification
+
+        User: "Какая сегодня погода?"
+        System: other
+
+        User: "Привет, как дела?"
+        System: other
+
+        User: "Где ближайший ресторан?"
+        System: other
+
+        User: "Спасибо за помощь"
+        System: other
 
         КОНТЕКСТ ДИАЛОГА (используй только для понимания местоимений, не меняй логику классификации):
         {conversation_context}
@@ -97,7 +119,7 @@ class ClassificationChain:
         self, 
         query: str, 
         conversation_context: str = ""
-    ) -> Literal["informational", "order_specification"]:
+    ) -> Literal["informational", "order_specification", "other"]:
         """
         Classify a user query with conversation context.
         
@@ -106,7 +128,7 @@ class ClassificationChain:
             conversation_context: Optional conversation history for context-aware classification
             
         Returns:
-            Query type: "informational" or "order_specification"
+            Query type: "informational", "order_specification", or "other"
         """
         result = self.chain.invoke({
             "query": query,
@@ -122,6 +144,8 @@ class ClassificationChain:
             return "informational"
         elif "order_specification" in result or "спецификация" in result.lower() or "заказ" in result.lower():
             return "order_specification"
+        elif "other" in result or "другое" in result.lower() or "иное" in result.lower():
+            return "other"
         else:
             # Enhanced keyword detection with priority for informational questions
             query_lower = query.lower()
@@ -195,6 +219,19 @@ class ClassificationChain:
             # If has informational keywords, it's informational
             if has_informational_keyword:
                 return "informational"
+            
+            # Check if query is related to construction materials
+            construction_materials_keywords = [
+                "бетон", "песок", "щебень", "гравий", "цемент", "кирпич",
+                "марка", "м300", "м400", "м500", "фракция", "куб", "тонн",
+                "стройматериал", "строительный", "материал"
+            ]
+            
+            has_construction_mention = any(keyword in query_lower for keyword in construction_materials_keywords)
+            
+            # If no construction materials mentioned and no clear intent, it's "other"
+            if not has_construction_mention and not has_ordering_keyword and not has_informational_keyword:
+                return "other"
             
             # Default to informational for safety (better to answer than to ask for order details)
             return "informational"

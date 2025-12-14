@@ -116,7 +116,21 @@ class OrchestratorChain:
         query_type = self.classification_chain.classify(query, conversation_context=conversation_context)
         
         # Step 2: Route based on classification
-        if query_type == "informational":
+        if query_type == "other":
+            # Other query → Return standard message
+            other_message = "К сожалению, я не могу ответить на этот вопрос, задайте другой."
+            
+            # Store in memory
+            memory.add_user_message(query)
+            memory.add_ai_message(other_message)
+            
+            return BotResponse(
+                message=other_message,
+                needs_clarification=False,
+                extracted_specs=None,
+                query_type="other"
+            )
+        elif query_type == "informational":
             # Informational query → RAG (uses project's RAG module: src/rag/)
             try:
                 # Query RAG with conversation context

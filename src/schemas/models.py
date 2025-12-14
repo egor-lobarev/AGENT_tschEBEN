@@ -56,7 +56,7 @@ class BotResponse(BaseModel):
     message: str = Field(..., description="Response message to user")
     needs_clarification: bool = Field(False, description="Whether clarification is needed")
     extracted_specs: Optional[OrderSpecs] = Field(None, description="Extracted order specifications")
-    query_type: Literal["informational", "order_specification"] = Field(
+    query_type: Literal["informational", "order_specification", "other"] = Field(
         ..., description="Type of query"
     )
 
