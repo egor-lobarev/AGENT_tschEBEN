@@ -167,59 +167,6 @@ print(response.message)
 
 После запуска `telegram_bot.py` или через Docker, бот автоматически обрабатывает все входящие сообщения в Telegram.
 
-#### Метрики
-
-Система подсчитывает метрики на каждый ответ бота:
-
-**Individual Response Metrics (per query):**
-- **score** (1-10): Overall quality score
-- **relevance** (1-10): How well the response addresses the query
-- **completeness** (1-10): How complete and informative the response is
-- **accuracy** (1-10): How correct and factual the information is
-- **clarity** (1-10): How clear and well-structured the response is
-- **reasoning**: Text explanation of the evaluation
-
-**Пример использования:**
-
-# Run evaluation with default queries
-python test_bot_metrics.py
-
-# Run with specific queries
-python test_bot_metrics.py --queries "Нужен бетон М300" "Какие характеристики у бетона?"
-
-# Run with simulated buyer (multi-turn conversations)
-python test_bot_metrics.py --simulated-buyer
-
-# Save results to specific file
-python test_bot_metrics.py --save-results my_results.json
-Results are saved to `test_results/` directory with timestamped filenames.
-
-#### Результат
-
-**Результаты отдельных запросов:**
-
-| Query | Type | Score | Relevance | Completeness | Accuracy | Clarity | Needs Clarification |
-|-------|------|-------|-----------|--------------|----------|---------|---------------------|
-| "Какие характеристики у бетона М300?" | informational | 8 | 9 | 8 | 9 | 8 | No |
-| "Хочу заказать бетон М300" | order_specification | 7 | 8 | 6 | 10 | 8 | Yes |
-| "Нужен песок для строительства" | order_specification | 8 | 9 | 8 | 10 | 8 | Yes |
-
-**Средние аггрегированные метрики:**
-
-| Metric | Value |
-|--------|-------|
-| Total Queries | 3 |
-| Average Score | 7.67 |
-| Min Score | 7 |
-| Max Score | 8 |
-| Scores ≥ 7 | 3 |
-| Scores ≥ 5 | 3 |
-| Scores < 5 | 0 |
-| Average Relevance | 8.67 |
-| Average Completeness | 7.33 |
-| Average Accuracy | 9.67 |
-| Average Clarity | 8.0 |
-
 ## Лицензия
 
 MIT
