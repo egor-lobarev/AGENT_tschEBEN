@@ -28,7 +28,9 @@ class ConstructionMaterialsBot:
         self,
         mistral_api_key: Optional[str] = None,
         use_in_memory: bool = False,
-        data_path: str = "data/raw/raw_materials.jsonl"
+        data_path: str = "data/raw/raw_materials.jsonl",
+        qdrant_host: Optional[str] = None,
+        qdrant_port: int = 6333
     ):
         """
         Initialize the Construction Materials Bot.
@@ -38,6 +40,9 @@ class ConstructionMaterialsBot:
             use_in_memory: If True, use in-memory Qdrant (data lost on restart). 
                           If False, use persistent disk storage (default, recommended)
             data_path: Path to JSONL data file for RAG
+            qdrant_host: If provided, connect to Qdrant server instead of local storage.
+                        Use "localhost" to connect to Docker Qdrant server.
+            qdrant_port: Qdrant server port (default: 6333)
         """
         self.mistral_api_key = mistral_api_key or os.getenv("MISTRAL_API_KEY")
         if not self.mistral_api_key:
@@ -56,7 +61,9 @@ class ConstructionMaterialsBot:
         print("Setting up RAG system...")
         vector_store, retriever, _ = setup_rag_system(
             use_in_memory=use_in_memory,
-            data_path=data_path
+            data_path=data_path,
+            qdrant_host=qdrant_host,
+            qdrant_port=qdrant_port
         )
         
         initialize_rag(retriever, llm=self.llm)
@@ -174,4 +181,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
